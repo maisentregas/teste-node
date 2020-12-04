@@ -37,4 +37,14 @@ describe('DbTodo Usecases', () => {
             expect(err.toString()).toMatch('Error');
         }
     });
+
+    test('Deveria dar erro quando tentasse editar um Todo sem parâmetro', async () => {
+        try {
+            const { sut } = makeSut();
+            await sut.update({ id: null, description: null });
+            fail();
+        } catch(err) {
+            expect(err.toString()).toMatch('Error');
+        }
+    });
 });
