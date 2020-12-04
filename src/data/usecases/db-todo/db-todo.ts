@@ -14,6 +14,9 @@ export class DbTodo implements Todo {
         }]);
     }
     get(todoId: number): Promise<TodoModel> {
+        if (!todoId) {
+            throw new Error('Id inválido!');
+        }
         return Promise.resolve({
             id: todoId,
             description: 'any_description',
