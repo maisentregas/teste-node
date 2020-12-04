@@ -32,6 +32,12 @@ export class DbTodo implements Todo {
         });
     }
     update(updateTodoModel: UpdateTodoModel): Promise<TodoModel> {
+        if (!updateTodoModel.id) {
+            throw new Error('Id inválido!');
+        } else if (!updateTodoModel.description) {
+            throw new Error('Descrição inválida!');
+        }
+
         return Promise.resolve({
             id: -1,
             description: 'updated_description',
