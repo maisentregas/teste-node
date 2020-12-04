@@ -54,4 +54,12 @@ describe('DbTodo Usecases', () => {
             expect(err.toString()).toMatch('Error');
         }
     });
+
+    test('Deveria editar um Todo quanto todos os parâmetros estivessem corretos', async () => {
+        const { sut } = makeSut();
+        const response = await sut.update({ id: -1, description: 'any_description' });
+        expect(response).toBeTruthy();
+        expect(response.id).toBe(-1);
+        expect(response.description).toBe('any_description');
+    });
 });
