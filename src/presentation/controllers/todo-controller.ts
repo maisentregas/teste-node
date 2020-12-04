@@ -1,12 +1,39 @@
-import { HttpRequest, HttpResponse } from '../protocols/http';
+import { HttpMethod, HttpRequest, HttpResponse } from '../protocols/http';
+import { Todo } from '../../domain/usecases/todo';
 
 export class TodoController {
-    handle(httpRequest: HttpRequest): Promise<HttpResponse> {
+    private readonly todo: Todo;
+    constructor(todo: Todo) {
+        this.todo = todo;
+    }
+
+    async handle(httpMethod: HttpMethod, httpRequest: HttpRequest): Promise<HttpResponse> {
+        let result;
         let response = { statusCode: 500 };
-        if (httpRequest?.body?.description &&
-            httpRequest.body.description.length > 0) {
-            response = { statusCode: 200 };
+
+        if (httpRequest.body) {
+            const { id, description } = httpRequest.body;
+            if (httpMethod === 'POST') {
+                if (description) {
+                    result = await this.todo.add({ description });
+                }
+            } else if (httpMethod === 'DELETE') {
+                if (id) {
+                    result = await this.todo.delete({ id });
+                }
+            } else if (httpMethod === 'PUT') {
+                if (id && description) {
+                    result = await this.todo.update({ id, description });
+                }
+            } else if (httpMethod === 'GET') {
+                result = await this.todo.list();
+            }
         }
+        
+        if (result) {
+            response.statusCode = 200;
+        }
+
         return Promise.resolve(response);
     }
 }
