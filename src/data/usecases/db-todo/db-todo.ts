@@ -45,6 +45,9 @@ export class DbTodo implements Todo {
         });
     }
     delete(deleteTodoModel: DeleteTodoModel): Promise<Boolean> {
+        if (!deleteTodoModel.id) {
+            throw new Error('Id inválido!');
+        }
         return Promise.resolve(true);
     }
 }
