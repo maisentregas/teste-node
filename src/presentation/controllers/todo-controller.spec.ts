@@ -47,6 +47,7 @@ const makeSut = () => {
 }
 
 describe('Todo-Controller', () => {
+    // Criar um Todo
     test('Deveria retornar o statusCode 500 ao tentar criar Todo inválido', async () => {
         const { sut } = makeSut();
         const request = {
@@ -82,6 +83,7 @@ describe('Todo-Controller', () => {
         expect(addSpy).toHaveBeenCalledWith({ description: 'any_description' });
     });
 
+    // Editar um Todo
     test('Deveria retornar o statusCode 500 ao tentar editar um Todo inválido', async () => {
         const { sut } = makeSut();
         const request = {
