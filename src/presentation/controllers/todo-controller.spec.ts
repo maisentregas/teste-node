@@ -15,6 +15,13 @@ const makeSut = () => {
                 created_at: 0,
             }]);
         }
+        get(todoId: number): Promise<TodoModel> {
+            return Promise.resolve({
+                id: todoId,
+                description: 'any_description',
+                created_at: -1,
+            });
+        }
         add(addTodoModel: AddTodoModel): Promise<TodoModel> {
             return Promise.resolve({
                 id: -1,
@@ -40,7 +47,7 @@ const makeSut = () => {
 }
 
 describe('Todo-Controller', () => {
-    test('Deveria retornar o erro 500 ao tentar criar Todo inválido', async () => {
+    test('Deveria retornar o statusCode 500 ao tentar criar Todo inválido', async () => {
         const { sut } = makeSut();
         const request = {
             body: {},
@@ -50,7 +57,7 @@ describe('Todo-Controller', () => {
         expect(response.statusCode).toBe(500);
     });
 
-    test('Deveria retornar o erro 200 ao criar Todo válido', async () => {
+    test('Deveria retornar o statusCode 200 ao criar Todo válido', async () => {
         const { sut } = makeSut();
         const request = {
             body: {
@@ -73,5 +80,15 @@ describe('Todo-Controller', () => {
 
         await sut.handle('POST', request);
         expect(addSpy).toHaveBeenCalledWith({ description: 'any_description' });
+    });
+
+    test('Deveria retornar o statusCode 500 ao tentar editar um Todo inválido', async () => {
+        const { sut } = makeSut();
+        const request = {
+            body: { },
+        };
+
+        const response = await sut.handle('PUT', request);
+        expect(response.statusCode).toBe(500);
     });
 });
