@@ -91,4 +91,17 @@ describe('Todo-Controller', () => {
         const response = await sut.handle('PUT', request);
         expect(response.statusCode).toBe(500);
     });
+
+    test('Deveria retornar o statusCode 200 ao tentar editar um Todo válido', async () => {
+        const { sut } = makeSut();
+        const request = {
+            body: {
+                id: -1,
+                description: 'update_description',
+            },
+        };
+
+        const response = await sut.handle('PUT', request);
+        expect(response.statusCode).toBe(200);
+    });
 });
