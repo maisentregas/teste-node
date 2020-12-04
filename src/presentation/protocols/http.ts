@@ -5,3 +5,5 @@ export interface HttpRequest {
 export interface HttpResponse {
     statusCode: number;
 }
+
+export type HttpMethod = "POST" | "PUT" | "GET" | "DELETE"
