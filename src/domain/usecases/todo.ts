@@ -15,6 +15,7 @@ export interface DeleteTodoModel {
 
 export interface Todo {
     list(): Promise<Array<TodoModel>>;
+    get(todoId: number): Promise<TodoModel>;
     add(addTodoModel: AddTodoModel): Promise<TodoModel>;
     update(updateTodoModel: UpdateTodoModel): Promise<TodoModel>;
     delete(deleteTodoModel: DeleteTodoModel): Promise<Boolean>;
