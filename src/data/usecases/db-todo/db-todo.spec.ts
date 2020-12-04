@@ -27,4 +27,14 @@ describe('DbTodo Usecases', () => {
             expect(err.toString()).toMatch('Error');
         }
     });
+
+    test('Deveria dar erro quando tentasse editar um Todo sem id', async () => {
+        try {
+            const { sut } = makeSut();
+            await sut.update({ id: null, description: 'any_description' });
+            fail();
+        } catch(err) {
+            expect(err.toString()).toMatch('Error');
+        }
+    });
 });
