@@ -7,7 +7,7 @@ const makeSut = () => {
 
 describe('DbTodo Usecases', () => {
     // Criar um Todo
-    test('Deveria criar um Todo se os parametros estiverem válidos', async () => {
+    test('Deveria dar erro quando tentasse criar um Todo sem descrição', async () => {
         try {
             const { sut } = makeSut();
             await sut.add({ description: null });
