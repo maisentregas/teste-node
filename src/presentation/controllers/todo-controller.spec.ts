@@ -104,4 +104,18 @@ describe('Todo-Controller', () => {
         const response = await sut.handle('PUT', request);
         expect(response.statusCode).toBe(200);
     });
+    
+    test('Deveria editar um Todo se os parametros estiverem válidos', async () => {
+        const { sut, todoStub } = makeSut();
+        const addSpy = jest.spyOn(todoStub, 'update');
+        const request = {
+            body: {
+                id: -1,
+                description: 'any_description',
+            },
+        };
+
+        await sut.handle('PUT', request);
+        expect(addSpy).toHaveBeenCalledWith({ id: -1, description: 'any_description' });
+    });
 });
