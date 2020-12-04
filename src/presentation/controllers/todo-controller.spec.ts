@@ -120,4 +120,15 @@ describe('Todo-Controller', () => {
         await sut.handle('PUT', request);
         expect(addSpy).toHaveBeenCalledWith({ id: -1, description: 'any_description' });
     });
+
+    // Deletar um Todo
+    test('Deveria retornar o statusCode 500 ao tentar deletar um Todo inválido', async () => {
+        const { sut } = makeSut();
+        const request = {
+            body: { },
+        };
+
+        const response = await sut.handle('DELETE', request);
+        expect(response.statusCode).toBe(500);
+    });
 });
