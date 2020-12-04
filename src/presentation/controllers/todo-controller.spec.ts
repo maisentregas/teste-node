@@ -70,7 +70,7 @@ describe('Todo-Controller', () => {
         expect(response.statusCode).toBe(200);
     });
 
-    test('Deveria criar um Todo se os parametros estiverem válidos', async () => {
+    test('Deveria retornar o statusCode 200 ao criar um Todo se os parametros estiverem válidos', async () => {
         const { sut, todoStub } = makeSut();
         const addSpy = jest.spyOn(todoStub, 'add');
         const request = {
@@ -79,8 +79,9 @@ describe('Todo-Controller', () => {
             },
         };
 
-        await sut.handle('POST', request);
+        const response = await sut.handle('POST', request);
         expect(addSpy).toHaveBeenCalledWith({ description: 'any_description' });
+        expect(response.statusCode).toBe(200);
     });
 
     // Editar um Todo
@@ -107,9 +108,9 @@ describe('Todo-Controller', () => {
         expect(response.statusCode).toBe(200);
     });
     
-    test('Deveria editar um Todo se os parametros estiverem válidos', async () => {
+    test('Deveria retornar o statusCode 200 ao editar um Todo se os parametros estiverem válidos', async () => {
         const { sut, todoStub } = makeSut();
-        const addSpy = jest.spyOn(todoStub, 'update');
+        const updateSpy = jest.spyOn(todoStub, 'update');
         const request = {
             body: {
                 id: -1,
@@ -117,8 +118,9 @@ describe('Todo-Controller', () => {
             },
         };
 
-        await sut.handle('PUT', request);
-        expect(addSpy).toHaveBeenCalledWith({ id: -1, description: 'any_description' });
+        const response = await sut.handle('PUT', request);
+        expect(updateSpy).toHaveBeenCalledWith({ id: -1, description: 'any_description' });
+        expect(response.statusCode).toBe(200);
     });
 
     // Deletar um Todo
@@ -144,16 +146,33 @@ describe('Todo-Controller', () => {
         expect(response.statusCode).toBe(200);
     });
     
-    test('Deveria deletar um Todo se os parametros estiverem válidos', async () => {
+    test('Deveria retornar o statusCode 200 ao deletar um Todo se os parametros estiverem válidos', async () => {
         const { sut, todoStub } = makeSut();
-        const addSpy = jest.spyOn(todoStub, 'delete');
+        const deleteSpy = jest.spyOn(todoStub, 'delete');
         const request = {
             body: {
                 id: -1,
             },
         };
 
-        await sut.handle('DELETE', request);
-        expect(addSpy).toHaveBeenCalledWith({ id: -1 });
+        const response = await sut.handle('DELETE', request);
+        expect(deleteSpy).toHaveBeenCalledWith({ id: -1 });
+        expect(response.statusCode).toBe(200);
+    });
+
+    // Listar Todos
+    test('Deveria retornar o statusCode 200 ao listar todos os Todos', async () => {
+        const { sut, todoStub } = makeSut();
+        const listSpy = jest.spyOn(todoStub, 'list');
+        const request = {
+            body: { },
+        };
+
+        const response = await sut.handle('GET', request);
+        const mockResponse = await listSpy.mock.results[0].value;
+ 
+        expect(listSpy).toHaveBeenCalledWith();
+        expect(mockResponse).toHaveLength(2);
+        expect(response.statusCode).toBe(200);
     });
 });
