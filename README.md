@@ -1,37 +1,76 @@
-# Teste Desenvolvedor MaisEntregas
+CHECKLIST API
 
-Olá caro desenvolvedor, nesse teste analisaremos seu conhecimento geral. Abaixo explicaremos tudo o que será necessário.
+Back end rest feito usando node.js, express e sequelize
 
-## Instruções
+REQUISITOS
 
-Você deve desenvolver uma API, utilizando Node, para uma aplicação de gerenciamento de TODOs.
+- Node.Js 10.10.0 ou superior
 
-A escolha das bibliotecas, banco de dados, arquitetura, etc, fica a seu critério.
+- Mysql / MariaDB 
 
-O código precisa ser capaz de rodar em uma máquina linux.
+- NPM  6.4.1 ou superior
 
-Altere o arquivo README explicando o que é preciso para rodar sua aplicação.
+- yarn 1.22.4 ou superior
 
-## API
+  
 
-A API precisa ser desenvolvida em Node, e deverá ser possível:
 
-- Listar todos os TODOs.
-- Adicionar um novo TODO.
-- Alterar um TODO.
-- Deletar um TODO.
 
-## Entrega
+INSTALAÇÃO
 
-Para iniciar o teste, faça um fork deste repositório, crie uma branch com o seu nome completo e depois envie-nos o pull request. Se você apenas clonar o repositório não vai conseguir fazer push e depois vai ser mais complicado fazer o pull request.
+​	Baixar o código fonte em seguida entre na pasta e rode os comandos
 
-## Nossa análise
+```shell
+npm i
+```
 
-- Organização do código, separação de módulos, legibilidade e comentários.
-- Histórico de commits.
+Configura o arquivo **config/connDB.js**
 
-## Dúvidas?
+```javascript
+module.exports = {
+    dialect: 'mysql',
+    host: '127.0.0.1',
+    username: 'root',
+    password: '',
+    database: 'todo',
+    define: {
+        timestamps: true,
+        underscored: true
+    },
+};
+```
 
-Quaisquer dúvidas que você venha a ter, consulte as issues para ver se alguém já não a fez e caso você não ache sua resposta, abra você mesmo uma nova issue!
+Configure o mesmo de a cordo com suas credenciais de banco de dados
 
-### Boa sorte!
+Crie o banco de dados
+
+```shell
+yarn sequelize db:create 
+```
+
+Execute as migrations
+
+```shell
+yarn sequelize db:migrate
+```
+
+e por fim coloque a api para rodar
+
+```shell
+node /app/server.js
+```
+
+
+
+Desenvolvi junto um app para visualizar as tarefas
+
+O mesmo pode ser conferido no seguinte repositorio 
+
+https://github.com/sousaakira/entrega-app
+
+ou acessado pela url
+
+https://entrega-ap.netlify.app
+
+recomendo acessar em um celular para melhor expêriencia
+
