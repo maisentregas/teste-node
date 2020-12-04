@@ -62,4 +62,15 @@ describe('DbTodo Usecases', () => {
         expect(response.id).toBe(-1);
         expect(response.description).toBe('any_description');
     });
+
+    // Deletar um Todo
+    test('Deveria dar erro quando tentasse deletar um Todo sem parâmetro', async () => {
+        try {
+            const { sut } = makeSut();
+            await sut.delete({ id: null });
+            fail();
+        } catch(err) {
+            expect(err.toString()).toMatch('Error');
+        }
+    });
 });
