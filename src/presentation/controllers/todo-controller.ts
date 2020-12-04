@@ -18,11 +18,11 @@ export class TodoController {
                     result = await this.todo.add({ description });
                 }
             } else if (httpMethod === 'DELETE') {
-                if (await this.todo.get(id)) {
+                if (id && await this.todo.get(id)) {
                     result = await this.todo.delete({ id });
                 }
             } else if (httpMethod === 'PUT') {
-                if (await this.todo.get(id) && description) {
+                if (id && await this.todo.get(id) && description) {
                     result = await this.todo.update({ id, description });
                 }
             } else if (httpMethod === 'GET') {
