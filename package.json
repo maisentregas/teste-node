@@ -1,0 +1,20 @@
+{
+  "name": "teste-node",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:FelipeFreitas96/teste-node.git",
+  "author": "Felipe Freitas <felipe.samidare@hotmail.com> (http://gitshowcase.com/FelipeFreitas96)",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "^26.0.16",
+    "jest": "^26.6.3",
+    "ts-node": "^9.1.0"
+  },
+  "dependencies": {
+    "@types/typescript": "^2.0.0",
+    "typescript": "^4.1.2"
+  },
+  "scripts": {
+    "test": "jest --watchAll"
+  }
+}
