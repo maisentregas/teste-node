@@ -73,4 +73,10 @@ describe('DbTodo Usecases', () => {
             expect(err.toString()).toMatch('Error');
         }
     });
+    
+    test('Deveria deletar um Todo quanto todos os parâmetros estivessem corretos', async () => {
+        const { sut } = makeSut();
+        const response = await sut.delete({ id: -1 });
+        expect(response).toBe(true);
+    });
 });
