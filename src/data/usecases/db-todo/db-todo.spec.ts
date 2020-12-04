@@ -17,6 +17,13 @@ describe('DbTodo Usecases', () => {
         }
     });
 
+    test('Deveria criar um Todo quanto todos os parâmetros estivessem corretos', async () => {
+        const { sut } = makeSut();
+        const response = await sut.add({ description: 'any_description' });
+        expect(response).toBeTruthy();
+        expect(response.description).toBe('any_description');
+    });
+
     // Editar um Todo
     test('Deveria dar erro quando tentasse editar um Todo sem descrição', async () => {
         try {
