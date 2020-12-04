@@ -143,4 +143,17 @@ describe('Todo-Controller', () => {
         const response = await sut.handle('DELETE', request);
         expect(response.statusCode).toBe(200);
     });
+    
+    test('Deveria deletar um Todo se os parametros estiverem válidos', async () => {
+        const { sut, todoStub } = makeSut();
+        const addSpy = jest.spyOn(todoStub, 'delete');
+        const request = {
+            body: {
+                id: -1,
+            },
+        };
+
+        await sut.handle('DELETE', request);
+        expect(addSpy).toHaveBeenCalledWith({ id: -1 });
+    });
 });
