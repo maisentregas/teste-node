@@ -27,7 +27,7 @@ export class DbTodo implements Todo {
 
         return Promise.resolve({
             id: -1,
-            description: 'any_description',
+            description: addTodoModel.description,
             created_at: -1,
         });
     }
@@ -39,8 +39,8 @@ export class DbTodo implements Todo {
         }
 
         return Promise.resolve({
-            id: -1,
-            description: 'updated_description',
+            id: updateTodoModel.id,
+            description: updateTodoModel.description,
             created_at: -1,
         });
     }
