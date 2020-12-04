@@ -25,14 +25,14 @@ const makeSut = () => {
         add(addTodoModel: AddTodoModel): Promise<TodoModel> {
             return Promise.resolve({
                 id: -1,
-                description: 'any_description',
+                description: addTodoModel.description,
                 created_at: -1,
             });
         }
         update(updateTodoModel: UpdateTodoModel): Promise<TodoModel> {
             return Promise.resolve({
                 id: -1,
-                description: 'updated_description',
+                description: updateTodoModel.description,
                 created_at: -1,
             });
         }
@@ -79,9 +79,8 @@ describe('Todo-Controller', () => {
             },
         };
 
-        const response = await sut.handle('POST', request);
+        await sut.handle('POST', request);
         expect(addSpy).toHaveBeenCalledWith({ description: 'any_description' });
-        expect(response.statusCode).toBe(200);
     });
 
     // Editar um Todo
@@ -100,11 +99,13 @@ describe('Todo-Controller', () => {
         const request = {
             body: {
                 id: -1,
-                description: 'update_description',
+                description: 'any_description',
             },
         };
 
         const response = await sut.handle('PUT', request);
+        expect(response.body).toBeTruthy();
+        expect(response.body.description).toBe('any_description');
         expect(response.statusCode).toBe(200);
     });
     
@@ -118,9 +119,8 @@ describe('Todo-Controller', () => {
             },
         };
 
-        const response = await sut.handle('PUT', request);
+        await sut.handle('PUT', request);
         expect(updateSpy).toHaveBeenCalledWith({ id: -1, description: 'any_description' });
-        expect(response.statusCode).toBe(200);
     });
 
     // Deletar um Todo
@@ -155,9 +155,8 @@ describe('Todo-Controller', () => {
             },
         };
 
-        const response = await sut.handle('DELETE', request);
+        await sut.handle('DELETE', request);
         expect(deleteSpy).toHaveBeenCalledWith({ id: -1 });
-        expect(response.statusCode).toBe(200);
     });
 
     // Listar Todos
@@ -169,10 +168,8 @@ describe('Todo-Controller', () => {
         };
 
         const response = await sut.handle('GET', request);
-        const mockResponse = await listSpy.mock.results[0].value;
- 
         expect(listSpy).toHaveBeenCalledWith();
-        expect(mockResponse).toHaveLength(2);
+        expect(response.body).toHaveLength(2);
         expect(response.statusCode).toBe(200);
     });
 });
