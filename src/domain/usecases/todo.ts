@@ -1,17 +1,19 @@
-interface AddTodoModel {
+import { TodoModel } from "../models/todo";
+
+export interface AddTodoModel {
     description: string;
 }
 
-interface UpdateTodoModel {
+export interface UpdateTodoModel {
     id: number;
     description: string;
 }
 
-interface DeleteTodoModel {
+export interface DeleteTodoModel {
     id: number;
 }
 
-interface Todo {
+export interface Todo {
     add(addTodoModel: AddTodoModel): Promise<TodoModel>;
     update(updateTodoModel: UpdateTodoModel): Promise<TodoModel>;
     delete(deleteTodoModel: DeleteTodoModel): Promise<Boolean>;
