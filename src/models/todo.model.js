@@ -1,6 +1,9 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
+/**
+ * Object schema of a ToDo element and his attributes
+ */
 var todoSchema = new Schema({
     description: {
         type: String,
@@ -12,6 +15,7 @@ var todoSchema = new Schema({
     },
     priority: {
         type: String,
+        enum: ["Low", "Medium", "High", "Urgent"],
         required: true
     },
     done: {

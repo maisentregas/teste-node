@@ -1,9 +1,9 @@
-const repository = require("../repositories/todo-repository");
+var repository = require("../repositories/todo-repository");
 
 /**
- * Recupera todos os ToDo's do banco de dados.
- * @param {*} req Requisição contendo parâmetros, se necessários.
- * @param {data, message} res Resposta da resquisição.
+ * Get all ToDo's from database.
+ * @param {*} req Request containing parameters, if necessary.
+ * @param {data, message} res Request answer.
  */
 exports.list_todo = async (req, res) =>{
     try {
@@ -15,9 +15,9 @@ exports.list_todo = async (req, res) =>{
 };
 
 /**
- * Deleta um ToDo do banco de dados.
- * @param {id} req ID do ToDo que se deseja remover.
- * @param {message} res Resposta da resquisição.
+ * Delete a ToDo from database.
+ * @param {id} req ID of ToDo that you  want to delete.
+ * @param {message} res Request answer.
  */
 exports.delete_todo = async (req, res) =>{
     try {
@@ -31,9 +31,9 @@ exports.delete_todo = async (req, res) =>{
 };
 
 /**
- * Cria um ToDo e armazena no banco de dados.
- * @param {body} req Requisição contendo parâmetros do objeto a ser criado.
- * @param {message} res Resposta da resquisição.
+ * Create a ToDo and storage in the database.
+ * @param {body} req Request containing parameters of the object to be created.
+ * @param {message} res Request answer.
  */
 exports.create_todo = async (req, res) => {
     try {
@@ -46,13 +46,13 @@ exports.create_todo = async (req, res) => {
 };
 
 /**
- * Atualiza algum atributo de um ToDo's no banco de dados.
- * @param {id, body} req ID do ToDo que se deseja atualizar.
- * @param {message} res Resposta da resquisição.
+ * Update a ToDo status 'done' equals true or false in the database.
+ * @param {id, body} req ID of ToDo that you  want to update.
+ * @param {message} res Request answer.
  */
 exports.update_todo = async function(req, res) {
     try {
-        await repository.update_todo(req.params.id, req.body);
+        await repository.update_todo(req.params.id);
         res.status(200).send({
             message: "ToDo atualizado com sucesso!"
         });
@@ -62,9 +62,9 @@ exports.update_todo = async function(req, res) {
 };
 
 /**
- * Recupera um ToDo's específico do banco de dados dado o ID do objeto.
- * @param {id} req ID do ToDo que se deseja recuperar.
- * @param {data, message} res Resposta da resquisição.
+ * Get a ToDo from database by his ID.
+ * @param {id} req ID of ToDo that you  want to get.
+ * @param {data, message} res Request answer.
  */
 exports.get_todo = async (req, res) =>{
     try {
@@ -76,9 +76,9 @@ exports.get_todo = async (req, res) =>{
 };
 
 /**
- * Deleta todos os ToDo's do banco de dados.
- * @param {*} req Requisição contendo parâmetros, se necessários.
- * @param {message} res Resposta da resquisição.
+ * Delete all ToDo's from database.
+ * @param {*} req Request containing parameters, if necessary.
+ * @param {message} res Request answer.
  */
 exports.delete_todos = async (req, res) =>{
     try {
