@@ -1,5 +1,7 @@
 import express, { Request, Response } from 'express';
 
+import '../typeorm';
+
 const app = express();
 
 app.get('/', (request: Request, response: Response) => {
