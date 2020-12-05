@@ -1,56 +1,44 @@
 import { TodoModel } from "../../../domain/models/todo";
 import { AddTodoModel, DeleteTodoModel, Todo, UpdateTodoModel } from "../../../domain/usecases/todo";
+import { TodoDbAdapter } from "../../protocols/todo-db-adapter";
 
 export class DbTodo implements Todo {
-    list(): Promise<Array<TodoModel>> {
-        return Promise.resolve([{
-            id: -1,
-            description: 'any_description',
-            created_at: -1,
-        }, {
-            id: 0,
-            description: 'any_description',
-            created_at: 0,
-        }]);
+    private readonly todoDbAdapter: TodoDbAdapter;
+    constructor(todoDbAdapter: TodoDbAdapter) {
+        this.todoDbAdapter = todoDbAdapter;
     }
+
+    list(): Promise<Array<TodoModel>> {
+        return this.todoDbAdapter.list();
+    }
+    
     get(todoId: number): Promise<TodoModel> {
         if (!todoId) {
             throw new Error('Id inválido!');
         }
-        return Promise.resolve({
-            id: todoId,
-            description: 'any_description',
-            created_at: -1,
-        });
+        return this.todoDbAdapter.get(todoId);
     }
+
     add(addTodoModel: AddTodoModel): Promise<TodoModel> {
         if (!addTodoModel.description) {
             throw new Error('Descrição inválida!');
         }
-
-        return Promise.resolve({
-            id: -1,
-            description: addTodoModel.description,
-            created_at: -1,
-        });
+        return this.todoDbAdapter.add(addTodoModel);
     }
+
     update(updateTodoModel: UpdateTodoModel): Promise<TodoModel> {
         if (!updateTodoModel.id) {
             throw new Error('Id inválido!');
         } else if (!updateTodoModel.description) {
             throw new Error('Descrição inválida!');
         }
-
-        return Promise.resolve({
-            id: updateTodoModel.id,
-            description: updateTodoModel.description,
-            created_at: -1,
-        });
+        return this.todoDbAdapter.update(updateTodoModel);
     }
+
     delete(deleteTodoModel: DeleteTodoModel): Promise<Boolean> {
         if (!deleteTodoModel.id) {
             throw new Error('Id inválido!');
         }
-        return Promise.resolve(true);
+        return this.todoDbAdapter.delete(deleteTodoModel);
     }
 }
