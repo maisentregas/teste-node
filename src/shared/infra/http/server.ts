@@ -1,13 +1,16 @@
-import express, { Request, Response } from 'express';
+import express from 'express';
+import cors from 'cors';
 
 import '../typeorm';
 
+import { routes } from './routes';
+
 const app = express();
 
-app.get('/', (request: Request, response: Response) => {
-  return response.json({ message: 'Hello World!' });
-});
+app.use(cors());
+app.use(express.json());
+app.use(routes);
 
 app.listen(3333, () => {
-  console.log('Server started on port 3333!');
+  console.log('Server started on port 3333');
 });
