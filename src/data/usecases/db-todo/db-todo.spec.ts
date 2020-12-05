@@ -1,8 +1,53 @@
 import { DbTodo } from "./db-todo";
+import { TodoDbAdapter } from '../../protocols/todo-db-adapter';
+import { TodoModel } from "../../../domain/models/todo";
+import { AddTodoModel, UpdateTodoModel, DeleteTodoModel } from "../../../domain/usecases/todo";
+
+const makeTodoDbAdapter = () => {
+    class TodoDbAdapterStub implements TodoDbAdapter {
+        list(): Promise<Array<TodoModel>> {
+            return Promise.resolve([{
+                id: -1,
+                description: 'any_description',
+                created_at: -1,
+            }, {
+                id: 0,
+                description: 'any_description',
+                created_at: 0,
+            }]);
+        }
+        get(todoId: number): Promise<TodoModel> {
+            return Promise.resolve({
+                id: todoId,
+                description: 'any_description',
+                created_at: -1,
+            });
+        }
+        add(addTodoModel: AddTodoModel): Promise<TodoModel> {
+            return Promise.resolve({
+                id: -1,
+                description: addTodoModel.description,
+                created_at: -1,
+            });
+        }
+        update(updateTodoModel: UpdateTodoModel): Promise<TodoModel> {
+            return Promise.resolve({
+                id: updateTodoModel.id,
+                description: updateTodoModel.description,
+                created_at: -1,
+            });
+        }
+        delete(deleteTodoModel: DeleteTodoModel): Promise<Boolean> {
+            return Promise.resolve(true);
+        }
+    }
+    return new TodoDbAdapterStub();
+}
 
 const makeSut = () => {
-    const sut = new DbTodo();
-    return { sut };
+    const todoDbAdapter = makeTodoDbAdapter();
+    const sut = new DbTodo(todoDbAdapter);
+    return { sut, todoDbAdapter };
 }
 
 describe('DbTodo Usecases', () => {
