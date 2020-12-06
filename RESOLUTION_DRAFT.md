@@ -25,3 +25,5 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 - Quando um todo for atualizado, deve-se alterar o campo updated_at com a data e hora atual.
 - Ao remover um TODO ele não deve ser removido do banco de dados, deve-se somente alterar o campo deleted_at com a data atual.
 - Na listagem dos TODOs, devem ser mostrado somente os TODOs cuja o campo deleted_at seja nulo, ou seja, os TODOs que não foram removidos.
+- Se não houver nenhum todo a ser listado, lançar uma exeção.
+- A aplicação de conter uma classe para gerenciar as exeções.
