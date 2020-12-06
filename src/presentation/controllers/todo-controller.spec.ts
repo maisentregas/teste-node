@@ -25,14 +25,14 @@ const makeSut = () => {
         add(addTodoModel: AddTodoModel): Promise<TodoModel> {
             return Promise.resolve({
                 id: -1,
-                description: addTodoModel.description,
+                description: 'any_description',
                 created_at: -1,
             });
         }
         update(updateTodoModel: UpdateTodoModel): Promise<TodoModel> {
             return Promise.resolve({
                 id: -1,
-                description: updateTodoModel.description,
+                description: 'any_description',
                 created_at: -1,
             });
         }
