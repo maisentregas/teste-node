@@ -26,14 +26,14 @@ const makeTodoDbAdapter = () => {
         add(addTodoModel: AddTodoModel): Promise<TodoModel> {
             return Promise.resolve({
                 id: -1,
-                description: addTodoModel.description,
+                description: 'any_description',
                 created_at: -1,
             });
         }
         update(updateTodoModel: UpdateTodoModel): Promise<TodoModel> {
             return Promise.resolve({
-                id: updateTodoModel.id,
-                description: updateTodoModel.description,
+                id: -1,
+                description: 'any_description',
                 created_at: -1,
             });
         }
@@ -55,7 +55,7 @@ describe('DbTodo Usecases', () => {
     test('Deveria dar erro quando tentasse criar um Todo sem descrição', async () => {
         try {
             const { sut } = makeSut();
-            await sut.add({ description: null });
+            await sut.add({ });
             fail();
         } catch(err) {
             expect(err.toString()).toMatch('Error');
@@ -73,7 +73,7 @@ describe('DbTodo Usecases', () => {
     test('Deveria dar erro quando tentasse editar um Todo sem descrição', async () => {
         try {
             const { sut } = makeSut();
-            await sut.update({ id: 1, description: null });
+            await sut.update({ id: 1 });
             fail();
         } catch(err) {
             expect(err.toString()).toMatch('Error');
@@ -83,7 +83,7 @@ describe('DbTodo Usecases', () => {
     test('Deveria dar erro quando tentasse editar um Todo sem id', async () => {
         try {
             const { sut } = makeSut();
-            await sut.update({ id: null, description: 'any_description' });
+            await sut.update({ description: 'any_description' });
             fail();
         } catch(err) {
             expect(err.toString()).toMatch('Error');
@@ -93,7 +93,7 @@ describe('DbTodo Usecases', () => {
     test('Deveria dar erro quando tentasse editar um Todo sem parâmetro', async () => {
         try {
             const { sut } = makeSut();
-            await sut.update({ id: null, description: null });
+            await sut.update({ });
             fail();
         } catch(err) {
             expect(err.toString()).toMatch('Error');
@@ -112,7 +112,7 @@ describe('DbTodo Usecases', () => {
     test('Deveria dar erro quando tentasse deletar um Todo sem parâmetro', async () => {
         try {
             const { sut } = makeSut();
-            await sut.delete({ id: null });
+            await sut.delete({ });
             fail();
         } catch(err) {
             expect(err.toString()).toMatch('Error');

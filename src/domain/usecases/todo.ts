@@ -1,16 +1,16 @@
 import { TodoModel } from "../models/todo";
 
 export interface AddTodoModel {
-    description: string;
+    description?: string;
 }
 
 export interface UpdateTodoModel {
-    id: number;
-    description: string;
+    id?: number;
+    description?: string;
 }
 
 export interface DeleteTodoModel {
-    id: number;
+    id?: number;
 }
 
 export interface Todo {
