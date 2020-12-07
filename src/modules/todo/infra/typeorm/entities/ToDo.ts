@@ -25,5 +25,5 @@ export class ToDo {
   updated_at: Date;
 
   @DeleteDateColumn()
-  deleted_at: Date;
+  deleted_at: Date | null;
 }
