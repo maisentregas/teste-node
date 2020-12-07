@@ -9,8 +9,8 @@ toDoRouter.get('/', todoController.find);
 
 toDoRouter.post('/', todoController.create);
 
-toDoRouter.put('/', todoController.save);
+toDoRouter.put('/:id', todoController.save);
 
-toDoRouter.delete('/', todoController.delete);
+toDoRouter.delete('/:id', todoController.delete);
 
 export { toDoRouter };
