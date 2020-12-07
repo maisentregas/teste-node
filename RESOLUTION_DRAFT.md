@@ -1,5 +1,3 @@
-# BANCO DE DADOS
-
 ### PARA SUBIR O BANCO DE DADOS:
 ```
 docker container run --name mais_entregas -e POSTGRES_PASSWORD=docker -e POSTGRES_DB=todo -p 5432:5432 -d postgres
@@ -12,6 +10,10 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 ```
 yarn test
 ```
+- Os testes unirários está com o coverage report, para mais informações, acessar a pasta **coverage** e abrir o arquivo **index.html**
+
+### API
+- Para testar a API, baixe o Insomnia e importe o arquivo de configuração: **Insomnia_2020-12-07.json**
 
 ### PARA INICIAR A APLICAÇÃO:
 ```
