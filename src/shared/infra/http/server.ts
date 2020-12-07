@@ -2,6 +2,8 @@ import express from 'express';
 import cors from 'cors';
 
 import '../typeorm';
+import '@shared/container';
+
 import { exceptionHandler } from './middleware/exceptionHandler';
 import { routes } from './routes';
 

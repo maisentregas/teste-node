@@ -1,5 +1,7 @@
+import { injectable, inject } from 'tsyringe';
+
 import { AppError } from '@shared/errors/AppError';
-import { IUUIdProvider } from '@shared/infra/providers/UUIdProvider/models/IUUIdProvider';
+import { IUUIdProvider } from '@shared/providers/UUIdProvider/models/IUUIdProvider';
 
 import { ITodoRepository } from '../repositories/ITodoRepository';
 
@@ -7,16 +9,17 @@ interface IRequest {
   id: string;
 }
 
+@injectable()
 export class DeleteToDoService {
   constructor(
-    private toDoRepository: ITodoRepository,
-    private uuidV4Provder: IUUIdProvider,
+    @inject('ToDoRepository') private toDoRepository: ITodoRepository,
+    @inject('UUIdProvider') private uuidV4Provider: IUUIdProvider,
   ) {}
 
   public async execute({ id }: IRequest): Promise<void> {
     if (!id) throw new AppError('the description field must be informed');
 
-    const uuidValidate = await this.uuidV4Provder.validate(id);
+    const uuidValidate = await this.uuidV4Provider.validate(id);
 
     if (!uuidValidate) throw new AppError('the uuid is not an uuid v4 valid');
 

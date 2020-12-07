@@ -1,10 +1,16 @@
-import { AppError } from '@shared/errors/AppError';
-import { ICreateToDoDTO } from '../dtos/ICreateToDoDTO';
-import { ToDo } from '../infra/typeorm/entities/ToDo';
-import { ITodoRepository } from '../repositories/ITodoRepository';
+import { injectable, inject } from 'tsyringe';
 
+import { AppError } from '@shared/errors/AppError';
+
+import { ICreateToDoDTO } from '../dtos/ICreateToDoDTO';
+import { ITodoRepository } from '../repositories/ITodoRepository';
+import { ToDo } from '../infra/typeorm/entities/ToDo';
+
+@injectable()
 export class CreateToDoService {
-  constructor(private toDoRepository: ITodoRepository) {}
+  constructor(
+    @inject('ToDoRepository') private toDoRepository: ITodoRepository,
+  ) {}
 
   public async execute({ description }: ICreateToDoDTO): Promise<ToDo> {
     if (!description)
