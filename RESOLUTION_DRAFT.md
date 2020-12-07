@@ -8,6 +8,15 @@ docker container run --name mais_entregas -e POSTGRES_PASSWORD=docker -e POSTGRE
 ```
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 ```
+### PARA EXECUTAR OS TESTES UNITÁRIOS:
+```
+yarn test
+```
+
+### PARA INICIAR A APLICAÇÃO:
+```
+yarn dev:server
+```
 
 # TO-DO
 
@@ -18,14 +27,14 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 - Deletar um ToDo.
 
 **REQUISITOS NÃO FUNCIONAIS**
-- As informações de um TODO devem ser armazenadas no PostgreSQL.
+- As informações de um ToDo devem ser armazenadas no PostgreSQL.
 
 **REGRA DE NEGÓCIO**
-- Na listagem dos ToDos, devem ser mostrado somente os ToDos cuja o campo deleted_at seja nulo, ou seja, os ToDos que não foram removidos.
+- Na listagem dos ToDos, devem ser mostrado somente os ToDos cuja o campo deleted_at seja nulo, ou seja, os ToDos que não foram "removidos".
 - Ao adicionar um ToDo o campo "description" deve ser preenchido.
 - Antes de atualizar um ToDo, verificar se o ToDo a ser atualizado existe.
-- Antes de atualizar um TODO, o campo description deve ser validado.
+- Antes de atualizar um ToDo, o campo description deve ser validado.
 - Quando um ToDo for atualizado, deve-se alterar o campo updated_at com a data e hora atual.
 - Ao remover um ToDo ele não deve ser removido do banco de dados, deve-se somente alterar o campo deleted_at com a data atual.
-- Ao remover um ToDo, deve-se verificar se o id informado é um UUID válido.
-- Se o uuid for válido, deve-ve se verificar se o TODO a ser removido existe na base de dados.
+- Ao remover um ToDo, deve-se verificar se o id informado é um uuid válido.
+- Se o uuid for válido, deve-ve se verificar se o ToDo a ser removido existe na base de dados.
