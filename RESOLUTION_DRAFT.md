@@ -12,18 +12,20 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 # TO-DO
 
 **REQUISITOS FUNCIONAIS**
-- Listar todos os TODOs.
-- Adicionar um novo TODO (ID, DESCRIPTION, CHECKED, CREATED_AT, UPDATED_AT, DELETED_AT).
-- Alterar um TODO.
-- Deletar um TODO.
+- Listar todos os ToDos.
+- Adicionar um novo ToDo (id, description, checked, created_at, updated_at, deleted_at).
+- Alterar um ToDo.
+- Deletar um ToDo.
 
 **REQUISITOS NÃO FUNCIONAIS**
 - As informações de um TODO devem ser armazenadas no PostgreSQL.
 
 **REGRA DE NEGÓCIO**
-- Ao adicionar um TODO o campo "text" deve ser preenchido.
-- Quando um todo for atualizado, deve-se alterar o campo updated_at com a data e hora atual.
-- Ao remover um TODO ele não deve ser removido do banco de dados, deve-se somente alterar o campo deleted_at com a data atual.
-- Na listagem dos TODOs, devem ser mostrado somente os TODOs cuja o campo deleted_at seja nulo, ou seja, os TODOs que não foram removidos.
-- Se não houver nenhum todo a ser listado, lançar uma exeção.
-- A aplicação de conter uma classe para gerenciar as exeções.
+- Na listagem dos ToDos, devem ser mostrado somente os ToDos cuja o campo deleted_at seja nulo, ou seja, os ToDos que não foram removidos.
+- Ao adicionar um ToDo o campo "description" deve ser preenchido.
+- Antes de atualizar um ToDo, verificar se o ToDo a ser atualizado existe.
+- Antes de atualizar um TODO, o campo description deve ser validado.
+- Quando um ToDo for atualizado, deve-se alterar o campo updated_at com a data e hora atual.
+- Ao remover um ToDo ele não deve ser removido do banco de dados, deve-se somente alterar o campo deleted_at com a data atual.
+- Ao remover um ToDo, deve-se verificar se o id informado é um UUID válido.
+- Se o uuid for válido, deve-ve se verificar se o TODO a ser removido existe na base de dados.
