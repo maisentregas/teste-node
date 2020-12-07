@@ -35,6 +35,6 @@ export class ToDoRepository implements ITodoRepository {
   }
 
   public async delete(id: string): Promise<void> {
-    this.ormRepository.delete(id);
+    this.ormRepository.softDelete(id);
   }
 }
