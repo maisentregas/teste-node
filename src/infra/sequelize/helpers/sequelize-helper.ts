@@ -6,7 +6,7 @@ class SequelizeHelper {
         return this.connection;
     }
 
-    connect(): void {
+    async connect(): Promise<void> {
         this.connection = new Sequelize({
             dialect: 'mariadb',
             host: '127.0.0.1',
@@ -17,8 +17,8 @@ class SequelizeHelper {
         });
     }
     
-    disconnect(): void {
-        this.connection.close();
+    async disconnect(): Promise<void> {
+        await this.connection.close();
     }
 }
 
