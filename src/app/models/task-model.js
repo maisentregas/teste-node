@@ -9,6 +9,7 @@ export default class Task extends Model {
       },
       done: {
         type: DataTypes.BOOLEAN,
+        defaultValue: false
       }
     }, { sequelize: connection });
   };
