@@ -3,6 +3,16 @@ import * as Yup from 'yup';
 
 
 export default new class TaskController {
+  async index(req, res) {
+    if(req.query) {
+      const allTasks = await Task.findAll({ where: { done:req.query.done } });
+      return res.json(allTasks);
+    };
+
+    const allTasks = await Task.findAll();
+    return res.json(allTasks);
+  };
+
   async store(req, res) {
     const taskData = Yup.object().shape({
       task: Yup.string().required().max(255)
@@ -19,7 +29,6 @@ export default new class TaskController {
     return res.json({ id, task, done });
   };
   
-
   async update(req, res) {
     const taskData = Yup.object().shape({
       id: Yup.number().required(),
@@ -41,7 +50,22 @@ export default new class TaskController {
       where: { id: req.body.id }
     });
 
-
     return res.json({ id, task, done });
+  };
+
+  async delete(req, res) {
+    if(!req.body.id) {
+      return res.json({ error: "Task id must be sendly" })
+    };
+
+    const taskExists = await Task.findOne({ where: { id: req.body.id }});
+
+    if(!taskExists) {
+      return res.json({ error: "Task not found" });
+    };
+
+    taskExists.destroy();
+
+    return res.json({ message: 'Task deleted successfully' });
   };
 };
