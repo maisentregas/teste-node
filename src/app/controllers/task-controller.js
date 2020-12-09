@@ -4,6 +4,8 @@ import * as Yup from 'yup';
 
 export default new class TaskController {
   async index(req, res) {
+    // Se o query param "done" for enviado, filtra a consulta baseada em 0 e 1
+    // pois o mysql não salva boolean, se não retorna todas as tarefas.
     if(req.query.done) {
       const queryParams = Yup.object().shape({
         done: Yup.number().required().min(0).max(1)
@@ -24,6 +26,8 @@ export default new class TaskController {
   };
 
   async store(req, res) {
+    // Verifica se a tarefa é um texto de 255 caracteres, se for salva no banco
+    // se não, retorna 400 e uma mensagem informando o que precisa ser alterado.
     const taskData = Yup.object().shape({
       task: Yup.string().required().max(255)
     });
@@ -40,6 +44,9 @@ export default new class TaskController {
   };
   
   async update(req, res) {
+    // Verifica se existe alguma tarefa pelo id enviado, se existir retorna um
+    // error de tarefa não encontrada, se existir, atualiza a mesma, com os dados
+    // task e done, caso tenha sido enviado
     const taskData = Yup.object().shape({
       id: Yup.number().required(),
       task: Yup.string().max(255),
@@ -64,6 +71,8 @@ export default new class TaskController {
   };
 
   async delete(req, res) {
+    // Verifica se a tarefa existe, se existir deleta, se não retorna um error 
+    // de tarefa não encontrada
     if(!req.body.id) {
       return res.json({ error: "Task id must be sendly" })
     };
