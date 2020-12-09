@@ -4,12 +4,22 @@ import * as Yup from 'yup';
 
 export default new class TaskController {
   async index(req, res) {
-    if(req.query) {
-      const allTasks = await Task.findAll({ where: { done:req.query.done } });
+    if(req.query.done) {
+      const queryParams = Yup.object().shape({
+        done: Yup.number().required().min(0).max(1)
+      });
+      
+      if(!(await queryParams.isValid(req.query))) {
+        return res.status(400).json({ error: 'Done param must be 1 to done and 0 to pending' });
+      };
+
+      const allTasks = await Task.findAll({ where: { done: req.query.done }});
+      
       return res.json(allTasks);
     };
 
     const allTasks = await Task.findAll();
+
     return res.json(allTasks);
   };
 
