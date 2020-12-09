@@ -1,6 +1,7 @@
 import { TodoController } from './todo-controller';
 import { AddTodoModel, DeleteTodoModel, Todo, UpdateTodoModel } from '../../domain/usecases/todo';
 import { TodoModel } from '../../domain/models/todo';
+import { HttpMethod } from '../protocols/http';
 
 const makeSut = () => {
     class TodoStub implements Todo {
@@ -49,7 +50,9 @@ const makeSut = () => {
 describe('Todo-Controller', () => {
     // Criar um Todo
     test('Deveria retornar o statusCode 500 ao tentar criar Todo inválido', async () => {
-        const { sut } = makeSut();
+        const { sut, todoStub } = makeSut();
+        jest.spyOn(todoStub, 'add').mockRejectedValue(new Error());
+        
         const request = {
             body: {},
         };
@@ -85,7 +88,9 @@ describe('Todo-Controller', () => {
 
     // Editar um Todo
     test('Deveria retornar o statusCode 500 ao tentar editar um Todo inválido', async () => {
-        const { sut } = makeSut();
+        const { sut, todoStub } = makeSut();
+        jest.spyOn(todoStub, 'update').mockRejectedValue(new Error());
+
         const request = {
             body: { },
         };
@@ -95,7 +100,9 @@ describe('Todo-Controller', () => {
     });
 
     test('Deveria retornar o statusCode 500 ao tentar editar um Todo sem id', async () => {
-        const { sut } = makeSut();
+        const { sut, todoStub } = makeSut();
+        jest.spyOn(todoStub, 'update').mockRejectedValue(new Error());
+
         const request = {
             body: { description: 'any_description' },
         };
@@ -105,7 +112,9 @@ describe('Todo-Controller', () => {
     });
     
     test('Deveria retornar o statusCode 500 ao tentar editar um Todo sem descrição', async () => {
-        const { sut } = makeSut();
+        const { sut, todoStub } = makeSut();
+        jest.spyOn(todoStub, 'update').mockRejectedValue(new Error());
+
         const request = {
             body: { id: -1 },
         };
@@ -145,7 +154,9 @@ describe('Todo-Controller', () => {
 
     // Deletar um Todo
     test('Deveria retornar o statusCode 500 ao tentar deletar um Todo inválido', async () => {
-        const { sut } = makeSut();
+        const { sut, todoStub } = makeSut();
+        jest.spyOn(todoStub, 'delete').mockRejectedValue(new Error());
+
         const request = {
             body: { },
         };
@@ -191,5 +202,16 @@ describe('Todo-Controller', () => {
         expect(listSpy).toHaveBeenCalledWith();
         expect(response.body).toHaveLength(2);
         expect(response.statusCode).toBe(200);
+    });
+
+    // Metodo inválido
+    test('Deveria retornar o statusCode 500 tentar metodo inválido', async () => {
+        const { sut } = makeSut();
+        const request = {
+            body: { },
+        };
+
+        const response = await sut.handle('INVALID_METHOD' as HttpMethod, request);
+        expect(response.statusCode).toBe(500);
     });
 });

@@ -10,6 +10,10 @@ describe('Sequelize Todo Db Adapter', () => {
         await sut.truncate();
         await SequelizeHelper.disconnect();
     });
+    test('Deveria válidar a conexão com o banco', async () => {
+        const connection = SequelizeHelper.getConnection();
+        expect(connection).not.toBe(undefined);
+    });
     test('Deveria retornar a conta caso os dados estiverem válidos', async () => {
         sut = new SequelizeTodoDbAdapter();
         const response = await sut.add({ description: 'any_description' });
