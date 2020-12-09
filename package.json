@@ -21,6 +21,9 @@
     "typescript": "^4.1.2"
   },
   "scripts": {
-    "test": "jest --watchAll"
+    "test:all": "jest --runInBand --passWithNoTests",
+    "test:unit": "yarn run test:all --watch -c jest-unit-config.json",
+    "test:integration": "yarn run test:all --watch -c jest-integration-config.json",
+    "test:coverage": "yarn run test:all --coverage"
   }
 }
