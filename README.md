@@ -7,8 +7,8 @@
 - Rode npx sequelize db:migrate para que todas as definições na pasta src/app/database/migrations/ seja feita automaticamente no banco de dados pelo sequelize-cli.
 - Agora você ja pode rodar o npm start para que o express suba o servidor e escute as chamadas na porta 3000 da nossa aplicação.
 
-- /task/create > Envie um objeto por post contendo { "task": string } Para criar uma nova tarefa.
-- /task/update > Envie um objeto por put contendo { "id": number, "task": opcional:string, "done": opcional:boolean } Para atualizar uma tarefa caso ela exista.
-- /task/delete > Envie um objeto por post contendo { "id": obrigatorio:number } Para deletar uma tarefa caso ela exista.
+- /task/create > Envie um json por post contendo { "task": string } Para criar uma nova tarefa.
+- /task/update > Envie um json por put contendo { "id": number, "task": opcional:string, "done": opcional:boolean } Para atualizar uma tarefa caso ela exista.
+- /task/delete > Envie um json por post contendo { "id": obrigatorio:number } Para deletar uma tarefa caso ela exista.
 - /task/all    > Faça um get para retornar todas tarefas.
 - /task/all?done=1 ou 0 > Faça um get com query params para retornar tarefas feitas ou pendentes(1 para feita e 0 para pendente).
