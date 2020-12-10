@@ -1,8 +1,10 @@
 import { Express, Router} from 'express';
-import todoRoute from '../routes/todo-route';
+import { makeRouteAdapter } from '../adapters/routeAdapter';
+import { makeTodoController } from '../factories/todoController';
 
 export const useRoutes = (app: Express) => {
     const router = Router();
-    router.use('/v1/todo', todoRoute);
+    const todoController = makeTodoController();
+    router.use('/v1/todo', makeRouteAdapter(todoController));
     app.use(router);
 }
