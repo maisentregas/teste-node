@@ -5,6 +5,9 @@ import { AddTodoModel, UpdateTodoModel, DeleteTodoModel } from "../../../domain/
 
 const makeTodoDbAdapter = () => {
     class TodoDbAdapterStub implements TodoDbAdapter {
+        truncate(deleteTodoModel: DeleteTodoModel): Promise<void> {
+            throw new Error("Method not implemented.");
+        }
         list(): Promise<Array<TodoModel>> {
             return Promise.resolve([{
                 id: -1,
