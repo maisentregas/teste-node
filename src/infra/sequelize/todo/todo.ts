@@ -5,10 +5,10 @@ import SequelizeHelper from '../helpers/sequelize-helper';
 
 export class SequelizeTodoDbAdapter implements TodoDbAdapter {
     list(): Promise<TodoModel[]> {
-        throw new Error("Method not implemented.");
+        return SequelizeHelper.TodoSequelizeModel.findAll();
     }
     get(todoId: number): Promise<TodoModel> {
-        throw new Error("Method not implemented.");
+        return SequelizeHelper.TodoSequelizeModel.findByPk(todoId);
     }
     update(updateTodoModel: UpdateTodoModel): Promise<TodoModel> {
         throw new Error("Method not implemented.");
