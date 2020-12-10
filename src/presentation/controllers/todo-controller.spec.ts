@@ -9,32 +9,37 @@ const makeSut = () => {
             return Promise.resolve([{
                 id: -1,
                 description: 'any_description',
-                created_at: -1,
+                createdAt: -1,
+                updatedAt: -1,
             }, {
                 id: 0,
                 description: 'any_description',
-                created_at: 0,
+                createdAt: -1,
+                updatedAt: -1,
             }]);
         }
         get(todoId: number): Promise<TodoModel> {
             return Promise.resolve({
                 id: todoId,
                 description: 'any_description',
-                created_at: -1,
+                createdAt: -1,
+                updatedAt: -1,
             });
         }
         add(addTodoModel: AddTodoModel): Promise<TodoModel> {
             return Promise.resolve({
                 id: -1,
                 description: 'any_description',
-                created_at: -1,
+                createdAt: -1,
+                updatedAt: -1,
             });
         }
         update(updateTodoModel: UpdateTodoModel): Promise<TodoModel> {
             return Promise.resolve({
                 id: -1,
                 description: 'any_description',
-                created_at: -1,
+                createdAt: -1,
+                updatedAt: -1,
             });
         }
         delete(deleteTodoModel: DeleteTodoModel): Promise<Boolean> {
