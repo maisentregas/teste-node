@@ -196,6 +196,18 @@ describe('Todo-Controller', () => {
     });
 
     // Listar Todos
+    test('Deveria retornar o statusCode 500 ao listar um Todo inválido', async () => {
+        const { sut, todoStub } = makeSut();
+        jest.spyOn(todoStub, 'get').mockRejectedValueOnce(new Error());
+
+        const request = {
+            body: { id: -1 },
+        };
+
+        const response = await sut.handle('GET', request);
+        expect(response.statusCode).toBe(500);
+    });
+
     test('Deveria retornar o statusCode 200 ao listar todos os Todos', async () => {
         const { sut, todoStub } = makeSut();
         const listSpy = jest.spyOn(todoStub, 'list');
@@ -220,6 +232,7 @@ describe('Todo-Controller', () => {
         expect(listSpy).toHaveBeenCalledWith(request.body.id);
         expect(response.statusCode).toBe(200);
     });
+
     // Metodo inválido
     test('Deveria retornar o statusCode 500 tentar metodo inválido', async () => {
         const { sut } = makeSut();
