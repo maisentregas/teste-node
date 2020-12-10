@@ -14,10 +14,22 @@ describe('Sequelize Todo Db Adapter', () => {
         const connection = SequelizeHelper.getConnection();
         expect(connection).not.toBe(undefined);
     });
-    test('Deveria retornar a conta caso os dados estiverem válidos', async () => {
+    test('Deveria retornar o Todo caso os dados estiverem válidos', async () => {
         sut = new SequelizeTodoDbAdapter();
         const response = await sut.add({ description: 'any_description' });
         expect(response).toBeTruthy();
         expect(response.description).toBe('any_description');
+    });
+    test('Deveria retornar o Todo criado se os dados estiverem válidos', async () => {
+        sut = new SequelizeTodoDbAdapter();
+        const response = await sut.get(1);
+        expect(response).toBeTruthy();
+        expect(response.description).toBe('any_description');
+    });
+    test('Deveria retornar uma lista de 1 Todo', async () => {
+        sut = new SequelizeTodoDbAdapter();
+        const response = await sut.list();
+        expect(response).toBeTruthy();
+        expect(response).toHaveLength(1);
     });
 });
