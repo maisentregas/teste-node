@@ -1,4 +1,9 @@
-import express from 'express';
+import app from './config';
+import SequelizeHelper from '../infra/sequelize/helpers/sequelize-helper';
 
-const app = express();
-app.listen(80, () => console.log("Rodando servidor express na porta 80."));
+SequelizeHelper.connect().then(() => {
+    const isConnected = SequelizeHelper.getConnection();
+    if (isConnected) {
+        app.listen(80, () => console.log("Rodando servidor express na porta 80."));
+    }
+});
