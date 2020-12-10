@@ -209,6 +209,17 @@ describe('Todo-Controller', () => {
         expect(response.statusCode).toBe(200);
     });
 
+    test('Deveria retornar o statusCode 200 ao listar um Todo válido', async () => {
+        const { sut, todoStub } = makeSut();
+        const listSpy = jest.spyOn(todoStub, 'get');
+        const request = {
+            body: { id: 1 },
+        };
+
+        const response = await sut.handle('GET', request);
+        expect(listSpy).toHaveBeenCalledWith(request.body.id);
+        expect(response.statusCode).toBe(200);
+    });
     // Metodo inválido
     test('Deveria retornar o statusCode 500 tentar metodo inválido', async () => {
         const { sut } = makeSut();
