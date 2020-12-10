@@ -1,7 +1,8 @@
 import { HttpMethod, HttpRequest, HttpResponse } from '../protocols/http';
 import { Todo } from '../../domain/usecases/todo';
+import { Controller } from '../protocols/controller';
 
-export class TodoController {
+export class TodoController implements Controller {
     private readonly todo: Todo;
     constructor(todo: Todo) {
         this.todo = todo;
