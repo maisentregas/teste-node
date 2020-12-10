@@ -1,4 +1,5 @@
-import { Sequelize } from "sequelize-typescript";
+import { Sequelize } from "sequelize";
+import { initTodoSequelizeModel } from "../models/todo-sequelize-model";
 
 class SequelizeHelper {
     private connection!: Sequelize;
@@ -13,8 +14,9 @@ class SequelizeHelper {
             username: 'root',
             password: '123123',
             database: 'test',
-            models: [__dirname + '/../models'],
         });
+
+        initTodoSequelizeModel(this.connection);
     }
     
     async disconnect(): Promise<void> {

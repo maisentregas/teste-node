@@ -1,23 +1,23 @@
-import { DataTypes, Model } from 'sequelize';
-import { AllowNull, AutoIncrement, Column, PrimaryKey, Table } from 'sequelize-typescript';
+import { DataTypes, Model, Sequelize } from "sequelize";
 
-export interface ITodo {
-    id: number;
-    description: string;
-    created_at: number;
+export default class TodoSequelizeModel extends Model {
+    public id!: number;
+    public description!: string;
 }
 
-@Table({ tableName: "todo_list", timestamps: true })
-export default class TodoSequelizeModel extends Model implements ITodo {
-    @AutoIncrement
-    @PrimaryKey
-    @Column
-    id!: number;
-
-    @AllowNull(false)
-    @Column(DataTypes.STRING)
-    description!: string;
-    
-    @Column(DataTypes.INTEGER)
-    created_at!: number;
+export const initTodoSequelizeModel = (sequelize: Sequelize) => {
+    TodoSequelizeModel.init({
+        id: {
+            type: DataTypes.INTEGER.UNSIGNED,
+            autoIncrement: true,
+            primaryKey: true,
+        },
+        description: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+    }, {
+        tableName: 'todo_list',
+        sequelize,
+    });
 }
