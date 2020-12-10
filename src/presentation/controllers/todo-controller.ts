@@ -21,7 +21,11 @@ export class TodoController implements Controller {
             } else if (httpMethod === 'PUT') {
                 result = await this.todo.update({ id, description });
             } else if (httpMethod === 'GET') {
-                result = await this.todo.list();
+                if (id) {
+                    result = await this.todo.get(id);
+                } else {
+                    result = await this.todo.list();
+                }
             } else {
                 throw new Error('Metodo inválido!');
             }
