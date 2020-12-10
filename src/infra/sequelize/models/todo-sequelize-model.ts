@@ -1,23 +1,17 @@
-import { DataTypes, Model, Sequelize } from "sequelize";
+import { Sequelize, DataTypes } from "sequelize";
 
-export default class TodoSequelizeModel extends Model {
-    public id!: number;
-    public description!: string;
-}
-
-export const initTodoSequelizeModel = (sequelize: Sequelize) => {
-    TodoSequelizeModel.init({
+export default (sequelize: Sequelize) => {
+    return sequelize.define('todo_list', {
         id: {
             type: DataTypes.INTEGER.UNSIGNED,
             autoIncrement: true,
             primaryKey: true,
         },
         description: {
-            type: DataTypes.STRING,
+            type: DataTypes.STRING(255),
             allowNull: false,
         },
     }, {
-        tableName: 'todo_list',
-        sequelize,
+        freezeTableName: true,
     });
 }

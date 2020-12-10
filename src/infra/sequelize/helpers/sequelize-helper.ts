@@ -1,8 +1,10 @@
 import { Sequelize } from "sequelize";
-import { initTodoSequelizeModel } from "../models/todo-sequelize-model";
+import useTodoSequelizeModel from "../models/todo-sequelize-model";
 
 class SequelizeHelper {
     private connection!: Sequelize;
+    public TodoSequelizeModel: any;
+
     getConnection(): Sequelize {
         return this.connection;
     }
@@ -16,7 +18,12 @@ class SequelizeHelper {
             database: 'test',
         });
 
-        initTodoSequelizeModel(this.connection);
+        this.TodoSequelizeModel = useTodoSequelizeModel(this.connection);
+        await this.sync();
+    }
+
+    async sync(): Promise<void> {
+        await this.connection.sync();
     }
     
     async disconnect(): Promise<void> {

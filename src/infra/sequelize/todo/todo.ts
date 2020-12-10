@@ -1,7 +1,7 @@
 import { AddTodoModel, TodoModel } from "./todo-protocols";
-import TodoSequelizeModel from "../models/todo-sequelize-model";
 import { TodoDbAdapter } from "../../../data/protocols/todo-db-adapter";
 import { UpdateTodoModel, DeleteTodoModel } from "../../../domain/usecases/todo";
+import SequelizeHelper from '../helpers/sequelize-helper';
 
 export class SequelizeTodoDbAdapter implements TodoDbAdapter {
     list(): Promise<TodoModel[]> {
@@ -17,10 +17,10 @@ export class SequelizeTodoDbAdapter implements TodoDbAdapter {
         throw new Error("Method not implemented.");
     }
     async truncate(): Promise<void> {
-        await TodoSequelizeModel.destroy({ truncate: true, cascade: false });
+        await SequelizeHelper.TodoSequelizeModel.destroy({ truncate: true, cascade: false });
     }
     async add(addTodoModel: AddTodoModel): Promise<TodoModel> {
-        const model = await TodoSequelizeModel.create({ ...addTodoModel });
+        const model = await SequelizeHelper.TodoSequelizeModel.create(addTodoModel);
         model.save();
         return model;
     }   
