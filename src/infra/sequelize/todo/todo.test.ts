@@ -18,7 +18,6 @@ describe('Sequelize Todo Db Adapter', () => {
         sut = new SequelizeTodoDbAdapter();
         const response = await sut.add({ description: 'any_description' });
         expect(response).toBeTruthy();
-        expect(response.id).toBe(1);
         expect(response.description).toBe('any_description');
     });
 });
