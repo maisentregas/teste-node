@@ -1,6 +1,8 @@
 import request from 'supertest'
 import app from '../src/app'
 
+let id = 1;
+
 test('Deve cadastrar novas tarefas', () => {
     return request(app).post('/')
         .send({
@@ -20,7 +22,7 @@ test('Deve impedir de inserir dados vazios', () => {
         })
         .then(res => {
             expect(res.status).toBe(400)
-            expect(res.body.error).toBe('Campo obrigatório.')
+            expect(res.body.error).toBe('Campos obrigatórios.')
         })
 })
 
@@ -39,4 +41,26 @@ test('Deve editar uma task de acordo com o ID setado', () => {
             expect(res.status).toBe(200)
             expect(res.body[0]).toHaveProperty('name')
         })
+})
+
+test('Deve impedir de usar valores inválidos na edição', () => {
+    return request(app).put('/1')
+        .send({
+            name: null,
+            done: null
+        })
+        .then(res => {
+            expect(res.status).toBe(400)
+            expect(res.body.error).toBe('Campos obrigatórios.')
+        })
+
+})
+
+test('Deve deletar uma Tarefa de acordo com o ID informado', () => {
+    return request(app).del('/1')
+        .then(res => {
+            expect(res.status).toBe(200)
+            expect(res.body.success).toBe('Tarefa Deletada.')
+        })
+
 })

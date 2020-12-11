@@ -7,7 +7,7 @@
     "start": "ts-node-dev --ignore-watch node_modules src/server.ts",
     "test": "jest --watchAll --verbose=true --detectOpenHandles",
     "knex:migrate": "knex migrate:latest --knexfile knexfile.ts",
-    "knex:rollback": "knex migrate:latest --knexfile knexfile.ts"
+    "knex:rollback": "knex migrate:rollback --knexfile knexfile.ts"
   },
   "repository": {
     "type": "git",
