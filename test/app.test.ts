@@ -8,8 +8,8 @@ test('Deve cadastrar novas tarefas', () => {
             done: false
         })
         .then(res => {
-            expect(res.status).toBe(200)
-            expect(res.body).toHaveProperty('name')
+            expect(res.status).toBe(201)
+            expect(res.body[0]).toHaveProperty('name')
         })
 })
 
