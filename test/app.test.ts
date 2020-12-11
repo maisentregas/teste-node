@@ -23,3 +23,8 @@ test('Deve impedir de inserir dados vazios', () => {
             expect(res.body.error).toBe('Campo obrigatório.')
         })
 })
+
+test('Deve exibir todas as Tarefas Cadastradas', () => {
+    return request(app).get('/')
+        .then(res => expect(res.status).toBe(200))
+})

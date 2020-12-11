@@ -13,4 +13,11 @@ routes.post('/', async (req: Request, res: Response) => {
     return res.status(201).json(task)
 })
 
+routes.get('/', async (req: Request, res: Response) => {
+    const result = await knex('task').orderBy('done', 'desc')
+
+    return res.status(200).json(result)
+})
+
+
 export default routes

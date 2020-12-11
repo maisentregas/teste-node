@@ -4,7 +4,7 @@ import controller from './controllers/controller'
 const app = express()
 app.use(express.json())
 
-app.get('/', (req: Request, res: Response) => {
+app.get('/teste', (req: Request, res: Response) => {
     res.send('Rodando')
 })
 
