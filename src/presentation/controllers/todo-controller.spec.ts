@@ -9,11 +9,13 @@ const makeSut = () => {
             return Promise.resolve([{
                 id: -1,
                 description: 'any_description',
+                hidden: false,
                 createdAt: -1,
                 updatedAt: -1,
             }, {
                 id: 0,
                 description: 'any_description',
+                hidden: false,
                 createdAt: -1,
                 updatedAt: -1,
             }]);
@@ -22,6 +24,7 @@ const makeSut = () => {
             return Promise.resolve({
                 id: todoId,
                 description: 'any_description',
+                hidden: false,
                 createdAt: -1,
                 updatedAt: -1,
             });
@@ -30,6 +33,7 @@ const makeSut = () => {
             return Promise.resolve({
                 id: -1,
                 description: 'any_description',
+                hidden: false,
                 createdAt: -1,
                 updatedAt: -1,
             });
@@ -38,12 +42,19 @@ const makeSut = () => {
             return Promise.resolve({
                 id: -1,
                 description: 'any_description',
+                hidden: false,
                 createdAt: -1,
                 updatedAt: -1,
             });
         }
-        delete(deleteTodoModel: DeleteTodoModel): Promise<Boolean> {
-            return Promise.resolve(true);
+        delete(deleteTodoModel: DeleteTodoModel): Promise<TodoModel> {
+            return Promise.resolve({
+                id: -1,
+                description: 'any_description',
+                hidden: true,
+                createdAt: -1,
+                updatedAt: -1,
+            });
         }
     }
 

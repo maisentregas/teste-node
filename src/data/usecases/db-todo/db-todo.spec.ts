@@ -12,11 +12,13 @@ const makeTodoDbAdapter = () => {
             return Promise.resolve([{
                 id: -1,
                 description: 'any_description',
+                hidden: false,
                 createdAt: -1,
                 updatedAt: -1,
             }, {
                 id: 0,
                 description: 'any_description',
+                hidden: false,
                 createdAt: -1,
                 updatedAt: -1,
             }]);
@@ -25,6 +27,7 @@ const makeTodoDbAdapter = () => {
             return Promise.resolve({
                 id: todoId,
                 description: 'any_description',
+                hidden: false,
                 createdAt: -1,
                 updatedAt: -1,
             });
@@ -33,6 +36,7 @@ const makeTodoDbAdapter = () => {
             return Promise.resolve({
                 id: -1,
                 description: 'any_description',
+                hidden: false,
                 createdAt: -1,
                 updatedAt: -1,
             });
@@ -41,12 +45,19 @@ const makeTodoDbAdapter = () => {
             return Promise.resolve({
                 id: -1,
                 description: 'new_description',
+                hidden: false,
                 createdAt: -1,
                 updatedAt: -1,
             });
         }
-        delete(deleteTodoModel: DeleteTodoModel): Promise<Boolean> {
-            return Promise.resolve(true);
+        delete(deleteTodoModel: DeleteTodoModel): Promise<TodoModel> {
+            return Promise.resolve({
+                id: -1,
+                description: 'new_description',
+                hidden: true,
+                createdAt: -1,
+                updatedAt: -1,
+            });
         }
     }
     return new TodoDbAdapterStub();
@@ -110,7 +121,7 @@ describe('DbTodo Usecases', () => {
     test('Deveria deletar um Todo quanto todos os parâmetros estivessem corretos', async () => {
         const { sut } = makeSut();
         const response = await sut.delete({ id: -1 });
-        expect(response).toBe(true);
+        expect(response.hidden).toBe(true);
     });
 
     // Listar Todos
@@ -133,6 +144,7 @@ describe('DbTodo Usecases', () => {
         expect(response).toBeTruthy();
         expect(response.id).toBe(-1);
         expect(response.description).toBe('any_description');
+        expect(response.hidden).toBe(false);
         expect(response.createdAt).toBe(-1);
         expect(response.updatedAt).toBe(-1);
     });

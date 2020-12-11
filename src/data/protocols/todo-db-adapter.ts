@@ -6,6 +6,6 @@ export interface TodoDbAdapter {
     get(todoId: number): Promise<TodoModel>;
     add(addTodoModel: AddTodoModel): Promise<TodoModel>;
     update(updateTodoModel: UpdateTodoModel): Promise<TodoModel>;
-    delete(deleteTodoModel: DeleteTodoModel): Promise<Boolean>;
+    delete(deleteTodoModel: DeleteTodoModel): Promise<TodoModel>;
     truncate(deleteTodoModel: DeleteTodoModel): Promise<void>;
 }

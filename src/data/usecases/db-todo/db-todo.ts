@@ -12,11 +12,13 @@ export class DbTodo implements Todo {
         return this.todoDbAdapter.list();
     }
     
-    get(todoId: number): Promise<TodoModel> {
-        if (!todoId) {
+    async get(todoId: number): Promise<TodoModel> {
+        const response = await this.todoDbAdapter.get(todoId);
+        if (!response || response.hidden) {
             return Promise.reject(new Error('Id inválido!'));
         }
-        return this.todoDbAdapter.get(todoId);
+
+        return Promise.resolve(response);
     }
 
     add(addTodoModel: AddTodoModel): Promise<TodoModel> {
@@ -35,8 +37,8 @@ export class DbTodo implements Todo {
         return this.todoDbAdapter.update(updateTodoModel);
     }
 
-    delete(deleteTodoModel: DeleteTodoModel): Promise<Boolean> {
-        if (!deleteTodoModel.id) {
+    async delete(deleteTodoModel: DeleteTodoModel): Promise<TodoModel> {
+        if (!deleteTodoModel.id || !await this.get(deleteTodoModel.id)) {
             return Promise.reject(new Error('Id inválido!'));
         }
         return this.todoDbAdapter.delete(deleteTodoModel);

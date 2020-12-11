@@ -4,6 +4,9 @@ import { UpdateTodoModel, DeleteTodoModel } from "../../../domain/usecases/todo"
 import SequelizeHelper from '../helpers/sequelize-helper';
 
 export class SequelizeTodoDbAdapter implements TodoDbAdapter {
+    async truncate(): Promise<void> {
+        await SequelizeHelper.TodoSequelizeModel.destroy({ truncate: true, cascade: false });
+    }
     list(): Promise<TodoModel[]> {
         return SequelizeHelper.TodoSequelizeModel.findAll();
     }
@@ -13,11 +16,13 @@ export class SequelizeTodoDbAdapter implements TodoDbAdapter {
     update(updateTodoModel: UpdateTodoModel): Promise<TodoModel> {
         throw new Error("Method not implemented.");
     }
-    delete(deleteTodoModel: DeleteTodoModel): Promise<Boolean> {
-        throw new Error("Method not implemented.");
-    }
-    async truncate(): Promise<void> {
-        await SequelizeHelper.TodoSequelizeModel.destroy({ truncate: true, cascade: false });
+    async delete(deleteTodoModel: DeleteTodoModel): Promise<TodoModel> {
+        await SequelizeHelper.TodoSequelizeModel.update({
+            hidden: true,
+        }, {
+            where: { id: deleteTodoModel.id },
+        });
+        return this.get(Number(deleteTodoModel.id));
     }
     async add(addTodoModel: AddTodoModel): Promise<TodoModel> {
         const model = await SequelizeHelper.TodoSequelizeModel.create(addTodoModel);

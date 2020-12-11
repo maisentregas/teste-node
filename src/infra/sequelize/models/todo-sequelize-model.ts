@@ -11,6 +11,11 @@ export default (sequelize: Sequelize) => {
             type: DataTypes.STRING(255),
             allowNull: false,
         },
+        hidden: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false,
+            defaultValue: false,
+        },
     }, {
         freezeTableName: true,
     });
