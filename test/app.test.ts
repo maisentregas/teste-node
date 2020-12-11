@@ -13,3 +13,13 @@ test('Deve cadastrar novas tarefas', () => {
         })
 })
 
+test('Deve impedir de inserir dados vazios', () => {
+    return request(app).post('/')
+        .send({
+            name: null
+        })
+        .then(res => {
+            expect(res.status).toBe(400)
+            expect(res.body.error).toBe('Campo obrigatório.')
+        })
+})
