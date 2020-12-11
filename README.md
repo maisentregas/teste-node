@@ -1,37 +1,33 @@
-# Teste Desenvolvedor MaisEntregas
+# Instalando
 
-Olá caro desenvolvedor, nesse teste analisaremos seu conhecimento geral. Abaixo explicaremos tudo o que será necessário.
+Para instalar, utilize o PowerShell do Windows ou o terminal do Linux os comandos a seguir:
 
-## Instruções
+1. ```git clone https://github.com/FelipeFreitas96/teste-node.git```
 
-Você deve desenvolver uma API, utilizando Node, para uma aplicação de gerenciamento de TODOs.
+2. ```cd teste-node```
 
-A escolha das bibliotecas, banco de dados, arquitetura, etc, fica a seu critério.
+3. ```npm install```
 
-O código precisa ser capaz de rodar em uma máquina linux.
+4. ```docker build -t mariadb-image -f docker/mariadb/Dockerfile .```
 
-Altere o arquivo README explicando o que é preciso para rodar sua aplicação.
+5. ```docker run -p 3366:3306 -d -v ${pwd}/docker/mariadb/config:/etc/mysql/conf.d -v ${pwd}/docker/mariadb/data:/var/lib/mysql --env-file .env --rm --name mariadb-container mariadb-image```
+
+6. ```docker build -t node-image -f docker/node/Dockerfile .```
+7. ```docker run -p 3333:80 -d --link mariadb-container --rm --name node-container node-image```
+8. ```A API estará disponível em http://localhost:3333/v1/todo```
+
+## Sobre
+* Clean Architeture
+* TDD
+* MariaDB
+* Docker
 
 ## API
 
-A API precisa ser desenvolvida em Node, e deverá ser possível:
-
-- Listar todos os TODOs.
-- Adicionar um novo TODO.
-- Alterar um TODO.
-- Deletar um TODO.
-
-## Entrega
-
-Para iniciar o teste, faça um fork deste repositório, crie uma branch com o seu nome completo e depois envie-nos o pull request. Se você apenas clonar o repositório não vai conseguir fazer push e depois vai ser mais complicado fazer o pull request.
-
-## Nossa análise
-
-- Organização do código, separação de módulos, legibilidade e comentários.
-- Histórico de commits.
-
-## Dúvidas?
-
-Quaisquer dúvidas que você venha a ter, consulte as issues para ver se alguém já não a fez e caso você não ache sua resposta, abra você mesmo uma nova issue!
-
-### Boa sorte!
+| Método | Endpoint | Parâmetros | Descrição |
+| ------------ | ------------ | ------------ | ------------ |
+| GET | /v1/todo | {} | Listar todos os TODOs |
+| GET | /v1/todo | { id: number } | Mostrar TODO |
+| POST | /v1/todo | { description: string } | Criar um TODO |
+| PUT | /v1/todo | { id: number, description: string } | Alterar um TODO |
+| DELETE | /v1/todo | { id: number } | Deletar um TODO |
