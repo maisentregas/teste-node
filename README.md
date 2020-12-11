@@ -24,7 +24,7 @@ Para instalar, utilize o PowerShell do Windows ou o terminal do Linux os comando
 ## API
 
 | Método | Endpoint | Parâmetros | Descrição |
-| ------------ | ------------ | ------------ |
+| ------------ | ------------ | ------------ | ------------ |
 | GET | /v1/todo | {} | Listar todos os TODOs |
 | GET | /v1/todo | { id: number } | Mostrar TODO |
 | POST | /v1/todo | { description: string } | Criar um TODO |
