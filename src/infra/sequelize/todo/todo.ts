@@ -13,8 +13,13 @@ export class SequelizeTodoDbAdapter implements TodoDbAdapter {
     get(todoId: number): Promise<TodoModel> {
         return SequelizeHelper.TodoSequelizeModel.findByPk(todoId);
     }
-    update(updateTodoModel: UpdateTodoModel): Promise<TodoModel> {
-        throw new Error("Method not implemented.");
+    async update(updateTodoModel: UpdateTodoModel): Promise<TodoModel> {
+        await SequelizeHelper.TodoSequelizeModel.update({
+            description: updateTodoModel.description
+        }, {
+            where: { id: updateTodoModel.id },
+        });
+        return this.get(Number(updateTodoModel.id));
     }
     async delete(deleteTodoModel: DeleteTodoModel): Promise<TodoModel> {
         await SequelizeHelper.TodoSequelizeModel.update({
