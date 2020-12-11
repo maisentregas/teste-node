@@ -28,3 +28,15 @@ test('Deve exibir todas as Tarefas Cadastradas', () => {
     return request(app).get('/')
         .then(res => expect(res.status).toBe(200))
 })
+
+test('Deve editar uma task de acordo com o ID setado', () => {
+    return request(app).put('/1')
+        .send({
+            name: 'Comer e Dormir',
+            done: true
+        })
+        .then(res => {
+            expect(res.status).toBe(200)
+            expect(res.body[0]).toHaveProperty('name')
+        })
+})

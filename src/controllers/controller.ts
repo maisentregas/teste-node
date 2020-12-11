@@ -19,5 +19,18 @@ routes.get('/', async (req: Request, res: Response) => {
     return res.status(200).json(result)
 })
 
+routes.put('/:id', async (req: Request, res: Response) => {
+    const { name, done } = req.body
+
+    const result = await knex('task')
+        .where({ id: req.params.id })
+        .first()
+        .update({ name, done })
+        .returning('*')
+
+    console.log(result)
+
+    return res.status(200).json(result)
+})
 
 export default routes
