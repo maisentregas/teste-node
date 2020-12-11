@@ -32,4 +32,10 @@ describe('Sequelize Todo Db Adapter', () => {
         expect(response).toBeTruthy();
         expect(response).toHaveLength(1);
     });
+    test('Deveria editar a descrição do Todo criado', async () => {
+        sut = new SequelizeTodoDbAdapter();
+        const response = await sut.update({ id: 1, description: 'new_description' });
+        expect(response).toBeTruthy();
+        expect(response.description).toBe('new_description');
+    });
 });
