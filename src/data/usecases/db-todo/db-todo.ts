@@ -8,8 +8,9 @@ export class DbTodo implements Todo {
         this.todoDbAdapter = todoDbAdapter;
     }
 
-    list(): Promise<Array<TodoModel>> {
-        return this.todoDbAdapter.list();
+    async list(): Promise<Array<TodoModel>> {
+        const list = await this.todoDbAdapter.list();
+        return Promise.resolve(list.filter(item => !item.hidden));
     }
     
     async get(todoId: number): Promise<TodoModel> {
