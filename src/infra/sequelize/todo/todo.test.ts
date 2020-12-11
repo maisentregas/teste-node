@@ -38,4 +38,10 @@ describe('Sequelize Todo Db Adapter', () => {
         expect(response).toBeTruthy();
         expect(response.description).toBe('new_description');
     });
-});
+    test('Deveria deletar o Todo criado', async () => {
+        sut = new SequelizeTodoDbAdapter();
+        const response = await sut.delete({ id: 1 });
+        expect(response).toBeTruthy();
+        expect(response.hidden).toBe(true);
+    });
+}); 
