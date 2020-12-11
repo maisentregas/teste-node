@@ -132,10 +132,20 @@ describe('DbTodo Usecases', () => {
     });
 
     // Mostrar Todos
-    test('Deveria dar erro quando tentasse mostrar um Todo inválido', async () => {
-        const { sut } = makeSut();
-        const response = sut.get(NaN);
-        await expect(response).rejects.toEqual(new Error('Id inválido!'));
+    test('Deveria dar erro quando tentasse mostrar um Todo deletado', async () => {
+        const { sut, todoDbAdapter } = makeSut();
+        jest.spyOn(todoDbAdapter, 'get').mockImplementationOnce(async () => {
+            return Promise.resolve({
+                id: -1,
+                description: 'new_description',
+                hidden: true,
+                createdAt: -1,
+                updatedAt: -1,
+            });
+        });
+
+        const response = sut.get(-1);
+        await expect(response).rejects.toThrow();
     });
 
     test('Deveria mostrar Todo quando inserisse um id válido', async () => {
