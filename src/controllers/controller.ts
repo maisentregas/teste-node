@@ -30,8 +30,6 @@ routes.put('/:id', async (req: Request, res: Response) => {
         .update({ name, done })
         .returning('*')
 
-    console.log(result)
-
     return res.status(200).json(result)
 })
 
@@ -41,7 +39,9 @@ routes.delete('/:id', async (req: Request, res: Response) => {
         .first()
         .del()
 
-    console.log(result)
+    if (result === 0) return res.status(400).send({ error: 'Selecione uma tarefa válida.' })
+
     return res.status(200).send({ success: 'Tarefa Deletada.' })
 })
+
 export default routes

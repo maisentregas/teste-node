@@ -1,8 +1,6 @@
 import request from 'supertest'
 import app from '../src/app'
 
-let id = 1;
-
 test('Deve cadastrar novas tarefas', () => {
     return request(app).post('/')
         .send({
@@ -56,11 +54,19 @@ test('Deve impedir de usar valores inválidos na edição', () => {
 
 })
 
-test('Deve deletar uma Tarefa de acordo com o ID informado', () => {
-    return request(app).del('/1')
-        .then(res => {
-            expect(res.status).toBe(200)
-            expect(res.body.success).toBe('Tarefa Deletada.')
-        })
+// test('Deve deletar uma Tarefa de acordo com o ID informado', () => {
+//     return request(app).del('/1')
+//         .then(res => {
+//             expect(res.status).toBe(200)
+//             expect(res.body.success).toBe('Tarefa Deletada.')
+//         })
 
+// })
+
+test('Deve impedir de deletar uma Tarefa com ID inválido', () => {
+    return request(app).del('/0')
+        .then(res => {
+            expect(res.status).toBe(400)
+            expect(res.body.error).toBe('Selecione uma tarefa válida.')
+        })
 })
