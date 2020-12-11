@@ -1,8 +1,15 @@
-import supertest from 'supertest';
+import request from 'supertest'
+import app from '../src/app'
 
-const request = supertest('http://localhost:8080')
+test('Deve cadastrar novas tarefas', () => {
+    return request(app).post('/')
+        .send({
+            name: 'Descer o Lixo',
+            done: false
+        })
+        .then(res => {
+            expect(res.status).toBe(200)
+            expect(res.body).toHaveProperty('name')
+        })
+})
 
-test('Devo responder na porta 8080', () => {
-    return request.get('/')
-        .then((res) => expect(res.status).toBe(200))
-});

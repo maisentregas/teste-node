@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "ts-node-dev --ignore-watch node_modules src/server.ts",
-    "test": "jest --watchAll --verbose=true --detectOpenHandles"
+    "test": "jest --watchAll --verbose=true --detectOpenHandles",
+    "knex:migrate": "knex migrate:latest --knexfile knexfile.ts",
+    "knex:rollback": "knex migrate:latest --knexfile knexfile.ts"
   },
   "repository": {
     "type": "git",
@@ -20,7 +22,8 @@
   "homepage": "https://github.com/MarcosMarchado/teste-node#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "knex": "^0.21.12"
+    "knex": "^0.21.12",
+    "pg": "^8.5.1"
   },
   "devDependencies": {
     "@types/express": "^4.17.9",
