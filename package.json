@@ -18,6 +18,7 @@
   "dependencies": {
     "@test-decorators/jest": "^0.2.0",
     "@types/typescript": "^2.0.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "mariadb": "^2.5.2",
     "sequelize": "5.21.10",
@@ -26,8 +27,8 @@
   "scripts": {
     "start": "sucrase-node src/main/server.ts",
     "test:all": "jest --runInBand --passWithNoTests",
-    "test:unit": "yarn run test:all --watch -c jest-unit-config.json",
-    "test:integration": "yarn run test:all --watch -c jest-integration-config.json",
-    "test:coverage": "yarn run test:all --coverage"
+    "test:unit": "npm run test:all --watch -c jest-unit-config.json",
+    "test:integration": "npm run test:all --watch -c jest-integration-config.json",
+    "test:coverage": "npm run test:all --coverage"
   }
 }
