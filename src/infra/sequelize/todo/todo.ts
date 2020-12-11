@@ -24,9 +24,7 @@ export class SequelizeTodoDbAdapter implements TodoDbAdapter {
         });
         return this.get(Number(deleteTodoModel.id));
     }
-    async add(addTodoModel: AddTodoModel): Promise<TodoModel> {
-        const model = await SequelizeHelper.TodoSequelizeModel.create(addTodoModel);
-        model.save();
-        return model;
+    add(addTodoModel: AddTodoModel): Promise<TodoModel> {
+        return SequelizeHelper.TodoSequelizeModel.create(addTodoModel);
     }   
 }
