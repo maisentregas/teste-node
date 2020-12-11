@@ -28,8 +28,8 @@ export class DbTodo implements Todo {
         return this.todoDbAdapter.add(addTodoModel);
     }
 
-    update(updateTodoModel: UpdateTodoModel): Promise<TodoModel> {
-        if (!updateTodoModel.id) {
+    async update(updateTodoModel: UpdateTodoModel): Promise<TodoModel> {
+        if (!updateTodoModel.id || !await this.get(updateTodoModel.id)) {
             return Promise.reject(new Error('Id inválido!'));
         } else if (!updateTodoModel.description) {
             return Promise.reject(new Error('Descrição inválida!'));
