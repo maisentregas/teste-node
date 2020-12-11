@@ -1,5 +1,7 @@
 import { Sequelize } from "sequelize";
 import useTodoSequelizeModel from "../models/todo-sequelize-model";
+import dotenv from "dotenv";
+dotenv.config();
 
 class SequelizeHelper {
     private connection!: Sequelize;
@@ -12,12 +14,11 @@ class SequelizeHelper {
     async connect(): Promise<void> {
         this.connection = new Sequelize({
             dialect: 'mariadb',
-            host: '127.0.0.1',
-            username: 'root',
-            password: '123123',
-            database: 'test',
+            host: process.env.MYSQL_HOST,
+            username: process.env.MYSQL_ROOT_USER,
+            password: process.env.MYSQL_ROOT_PASSWORD,
+            database: process.env.MYSQL_DATABASE,
         });
-
         this.TodoSequelizeModel = useTodoSequelizeModel(this.connection);
         await this.sync();
     }
