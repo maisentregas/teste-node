@@ -41,6 +41,18 @@ test('Deve editar uma task de acordo com o ID setado', () => {
         })
 })
 
+test('Deve impedir de editar uma Tarefa com ID inválido', () => {
+    return request(app).put('/0')
+        .send({
+            name: 'Comer e Dormir',
+            done: true
+        })
+        .then(res => {
+            expect(res.status).toBe(400)
+            expect(res.body.error).toBe('Selecione uma tarefa válida.')
+        })
+})
+
 test('Deve impedir de usar valores inválidos na edição', () => {
     return request(app).put('/1')
         .send({
@@ -70,3 +82,4 @@ test('Deve impedir de deletar uma Tarefa com ID inválido', () => {
             expect(res.body.error).toBe('Selecione uma tarefa válida.')
         })
 })
+
