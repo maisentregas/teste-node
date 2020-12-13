@@ -1,8 +1,4 @@
-# Teste Desenvolvedor MaisEntregas
-
-Olá caro desenvolvedor, nesse teste analisaremos seu conhecimento geral. Abaixo explicaremos tudo o que será necessário.
-
-## Instruções
+## Teste Desenvolvedor MaisEntregas
 
 Você deve desenvolver uma API, utilizando Node, para uma aplicação de gerenciamento de TODOs.
 
@@ -12,26 +8,37 @@ O código precisa ser capaz de rodar em uma máquina linux.
 
 Altere o arquivo README explicando o que é preciso para rodar sua aplicação.
 
-## API
+## Como Rodar:
 
-A API precisa ser desenvolvida em Node, e deverá ser possível:
+1. Download do clone deste repositório.
 
-- Listar todos os TODOs.
-- Adicionar um novo TODO.
-- Alterar um TODO.
-- Deletar um TODO.
+2. Entrar na pasta do projeto e instalar as dependências:
+```
 
-## Entrega
+npm install
+npm install knex -g
+npm install jest -g
+```
+5. Alterar as variáveis de configuração dos arquivos connection.ts e knexfile.ts:
 
-Para iniciar o teste, faça um fork deste repositório, crie uma branch com o seu nome completo e depois envie-nos o pull request. Se você apenas clonar o repositório não vai conseguir fazer push e depois vai ser mais complicado fazer o pull request.
+    connection: {
+        host: "localhost",
+        database: 'todo',
+        user: 'usuário-postgres-maquina-local',
+        password: 'senha',
+        port: 5432
+    }
+6. Rodar as migrations e Seeds:
+```
 
-## Nossa análise
-
-- Organização do código, separação de módulos, legibilidade e comentários.
-- Histórico de commits.
-
-## Dúvidas?
-
-Quaisquer dúvidas que você venha a ter, consulte as issues para ver se alguém já não a fez e caso você não ache sua resposta, abra você mesmo uma nova issue!
-
-### Boa sorte!
+npm run knex:migrate
+npm run knex:seed
+```
+7. Rodar o Projeto:
+```
+npm start
+```
+Para rodar os testes: 
+```
+npm test
+```

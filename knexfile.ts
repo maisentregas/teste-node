@@ -1,11 +1,13 @@
 import path from 'path'
 
 module.exports = {
-  client: 'postgresql',
+  client: 'pg',
   connection: {
+    host: "localhost",
     database: 'todo',
     user: 'postgres',
-    password: 'marcos'
+    password: 'marcos',
+    port: 5432
   },
   migrations: {
     directory: path.resolve(__dirname, 'src', 'database', 'migrations')

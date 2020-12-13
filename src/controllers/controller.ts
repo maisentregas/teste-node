@@ -15,7 +15,7 @@ class Controller {
     }
 
     async getAll(req: Request, res: Response) {
-        const result = await knex('task').orderBy('done', 'desc')
+        const result = await knex('task').orderBy('done', 'asc')
 
         return res.status(200).json(result)
     }
