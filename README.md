@@ -20,7 +20,7 @@ npm install knex -g
 npm install jest -g
 ```
 5. Alterar as variáveis de configuração dos arquivos connection.ts e knexfile.ts:
-
+```
     connection: {
         host: "localhost",
         database: 'todo',
@@ -28,6 +28,8 @@ npm install jest -g
         password: 'senha',
         port: 5432
     }
+    
+```
 6. Rodar as migrations e Seeds:
 ```
 
