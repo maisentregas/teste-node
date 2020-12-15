@@ -14,7 +14,6 @@ class UpdateTodoService {
     const todoRepository = getRepository(Todo);
 
     const todo = await todoRepository.findOne(id);
-    console.log(todo);
     if(!todo) {
       throw new AppError('Todo not Exists');
     }
