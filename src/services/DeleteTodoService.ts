@@ -1,9 +1,6 @@
 import { getRepository } from 'typeorm';
 import AppError from '../error/AppError';
-
-import Todo from "../models/Todo";
-
-
+import Todo from '../models/Todo';
 
 class DeleteTodoService {
   public async execute(id: string): Promise<void> {
@@ -14,7 +11,12 @@ class DeleteTodoService {
 
     const todoRepository = getRepository(Todo);
 
-    let todo = todoRepository.delete(id);
+    const todoExists = await todoRepository.findOne({ where: { id } });
+    if (!todoExists) {
+      throw new AppError('Todo not Exists');
+    }
+
+   await todoRepository.delete(id);
   }
 }
 

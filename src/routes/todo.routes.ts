@@ -1,14 +1,29 @@
-import { request, response, Router } from 'express';
+import { Router } from 'express';
 import { getRepository } from 'typeorm';
+import AppError from '../error/AppError';
 import Todo from '../models/Todo';
 import CreateTodoService from '../services/CreateTodoService';
 import DeleteTodoService from '../services/DeleteTodoService';
 
 const todoRouter = Router();
 
-todoRouter.get('/', async (request, response) => {
+todoRouter.get('/:id?', async (request, response) => {
+  const { id } = request.params;
   const todoRepository = getRepository(Todo);
-  return response.json(await todoRepository.find());
+
+  if (id) {
+    const todoExists = await todoRepository.findOne({where: { id }});
+      if(todoExists) {
+        return response.json(todoExists);
+      } else {
+        throw new AppError('Todo not exists')
+      }
+  } else {
+    return response.json(await todoRepository.find());
+  }
+
+
+
 });
 
 todoRouter.post('/', async (request, response) => {
@@ -31,7 +46,7 @@ todoRouter.delete('/:id', async (request, response) => {
 
   await deleteTodo.execute(id);
 
-  return response.send(204);
+  return response.status(204).send();
 })
 
 

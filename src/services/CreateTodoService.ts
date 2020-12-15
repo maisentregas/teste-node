@@ -1,6 +1,6 @@
 import { getRepository } from 'typeorm';
-
 import Todo from "../models/Todo";
+
 
 interface Request {
   title: string;
