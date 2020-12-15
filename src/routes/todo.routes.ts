@@ -4,6 +4,7 @@ import AppError from '../error/AppError';
 import Todo from '../models/Todo';
 import CreateTodoService from '../services/CreateTodoService';
 import DeleteTodoService from '../services/DeleteTodoService';
+import UpdateTodoService from '../services/UpdateTodoService';
 
 const todoRouter = Router();
 
@@ -34,6 +35,20 @@ todoRouter.post('/', async (request, response) => {
     title,
     content,
     finished: false
+  });
+
+  return response.json(todo);
+});
+
+todoRouter.put('/', async (request, response) => {
+  const { id, title, content, finished } = request.body;
+  const updateTodo = new UpdateTodoService();
+
+  const todo = await updateTodo.execute({
+    id,
+    title,
+    content,
+    finished
   });
 
   return response.json(todo);
