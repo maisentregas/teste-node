@@ -37,5 +37,38 @@ Rodando o projeto
 `npm start`
 
 ---
+## Exemplos de Requisição
+
+`
+GET http://localhost:3333/todo HTTP/1.1
+
+GET http://localhost:3333/todo/:id HTTP/1.1
+
+POST http://localhost:3333/todo HTTP/1.1
+content-type: application/json
+
+{
+	"title": "Lavar o Carro",
+	"content": "Lembrar de Aspirar"
+}
+
+PUT http://localhost:3333/todo HTTP/1.1
+content-type: application/json
+
+{
+	"id": "222e1dda-3279-40f1-9a8b-dc3a298fdffe",
+	"title": "Lavar o Carro",
+	"content": "Lembrar de Aspirar e Polir",
+	"finished": true
+}
+
+DELETE http://localhost:3333/todo/:id HTTP/1.1
+`
+
+
+
+
+---
+
 
 Made with ❤ &nbsp;by Edgar Ribeiro 👋 &nbsp;[See my linkedin](https://www.linkedin.com/in/ribeiro-edgar/)
