@@ -1,37 +1,74 @@
-# Teste Desenvolvedor MaisEntregas
+# ✅️ Todo App
 
-Olá caro desenvolvedor, nesse teste analisaremos seu conhecimento geral. Abaixo explicaremos tudo o que será necessário.
+<p align="center"><img  alt="Mais Entregas" src="https://avatars1.githubusercontent.com/u/57957603?s=200&v=4" /></p>
 
-## Instruções
+Aplicação desenvolvida como etapa para processo seletivo da empresa [Mais Entregas](https://github.com/maisentregas).
 
-Você deve desenvolver uma API, utilizando Node, para uma aplicação de gerenciamento de TODOs.
+<p align="center">
+	<a href="https://www.linkedin.com/in/ribeiro-edgar/" target="_blank" rel="noopener noreferrer"><img alt="Made by" src="https://img.shields.io/badge/made%20by-Edgar%20Ribeiro-%23FF2800"></a>
+</p>
 
-A escolha das bibliotecas, banco de dados, arquitetura, etc, fica a seu critério.
+---
+## Requisitos para Executar a Aplicação
 
-O código precisa ser capaz de rodar em uma máquina linux.
+* Node.
+* NPM.
+* Git.
+* Postgres SQL (Pode ser Instalado no Sistema Operacional ou Utilizando o Docker).
 
-Altere o arquivo README explicando o que é preciso para rodar sua aplicação.
+## Rodando a aplicação
 
-## API
+Parametrização do Banco de dados a ser utilizado, deverar ser editado no arquivo `ormconfig.json`.
 
-A API precisa ser desenvolvida em Node, e deverá ser possível:
+Clone o Repositório
 
-- Listar todos os TODOs.
-- Adicionar um novo TODO.
-- Alterar um TODO.
-- Deletar um TODO.
+`git clone https://github.com/eneto774/teste-node.git`
 
-## Entrega
+Acesse a pasta do projeto
 
-Para iniciar o teste, faça um fork deste repositório, crie uma branch com o seu nome completo e depois envie-nos o pull request. Se você apenas clonar o repositório não vai conseguir fazer push e depois vai ser mais complicado fazer o pull request.
+`cd teste-node`
 
-## Nossa análise
+Baixando Dependencias
 
-- Organização do código, separação de módulos, legibilidade e comentários.
-- Histórico de commits.
+`npm install`
 
-## Dúvidas?
+Rodando o projeto
 
-Quaisquer dúvidas que você venha a ter, consulte as issues para ver se alguém já não a fez e caso você não ache sua resposta, abra você mesmo uma nova issue!
+`npm start`
 
-### Boa sorte!
+---
+## Exemplos de Requisição
+
+`
+GET http://localhost:3333/todo HTTP/1.1
+
+GET http://localhost:3333/todo/:id HTTP/1.1
+
+POST http://localhost:3333/todo HTTP/1.1
+content-type: application/json
+
+{
+	"title": "Lavar o Carro",
+	"content": "Lembrar de Aspirar"
+}
+
+PUT http://localhost:3333/todo HTTP/1.1
+content-type: application/json
+
+{
+	"id": "222e1dda-3279-40f1-9a8b-dc3a298fdffe",
+	"title": "Lavar o Carro",
+	"content": "Lembrar de Aspirar e Polir",
+	"finished": true
+}
+
+DELETE http://localhost:3333/todo/:id HTTP/1.1
+`
+
+
+
+
+---
+
+
+Made with ❤ &nbsp;by Edgar Ribeiro 👋 &nbsp;[See my linkedin](https://www.linkedin.com/in/ribeiro-edgar/)
